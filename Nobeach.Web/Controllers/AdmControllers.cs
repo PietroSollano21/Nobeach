@@ -8,7 +8,7 @@ using Nobeach.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Barbearia.Controllers
+namespace Nobeach.Controllers
 {
     public class AdmController : Controller
     {
@@ -20,11 +20,13 @@ namespace Barbearia.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Admin()
         {
-            var barbeiroLogado = User.Identity?.Name;
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == barbeiroLogado);
+            var admLogado = User.Identity?.Name;
+var usuario = await _context.Usuarios
+    .FirstOrDefaultAsync(u => u.Email == admLogado);
             if (usuario == null || usuario.Perfil != "Admin")            {
                 return RedirectToAction("Login", "Usuario");
             }
+
             DateTime dataHoje = DateTime.Today;
             //var agendamentos = await _context.Agendamentos.Where(a => (a.statuspagamento == "Pagar na hora" ||  a.statuspagamento == "Pago") && a.BarbeiroNome == usuario.Nome).Where(a => a.Data.Date >= dataHoje.Date).OrderBy(a => a.Data).ThenBy(a => a.Hora).ToListAsync();
     var agendamentos = await _context.Agendamentos.Where(a => a.Data.Date >= dataHoje.Date).OrderBy(a => a.Data).ThenBy(a => a.Hora).ToListAsync();
@@ -34,8 +36,7 @@ namespace Barbearia.Controllers
 public async Task<IActionResult> ConfigurarDias()
     {
 
-        var barbeiroid = User.Identity?.Name;
-        var datasconfig = _context.Diaquadras.Where(d => d.BarbeiroId == barbeiroid && d.Data >= DateTime.Today).OrderBy(d => d.Data).ToList();
+        var datasconfig = _context.Diaquadras.Where(d => d.Data >= DateTime.Today).OrderBy(d => d.Data).ToList();
         var agendamentos = _context.Agendamentos.Where(a => a.Data >= DateTime.Today).ToList();
         return View(datasconfig);
     }
@@ -48,11 +49,11 @@ public async Task<IActionResult> ConfigurarDias()
         {
             return BadRequest("Erro de Binding: Os dados do formulário não chegaram no Controller. Verifique os nomes (name=) no HTML.");
         }
-       var barbeiroId = User.Identity.Name;
+       var QuadraId = User.Identity.Name;
        bool vaiTrabalhar = status == "Disponível";
        bool folga = status == "Folga";
-       Console.WriteLine($"BarbeiroId salvo: {User.Identity.Name}");
-         var dataExistente = await _context.Diaquadras.FirstOrDefaultAsync(d => d.BarbeiroId == barbeiroId && d.Data.Date == novaData.Date);
+       Console.WriteLine($"QuadraId salvo: {User.Identity.Name}");
+         var dataExistente = await _context.Diaquadras.FirstOrDefaultAsync(d =>d.Data.Date == novaData.Date);
     if(!vaiTrabalhar)
             {
                 //var agendamentodia = await _context.Agendamentos.Where(a => a.Data.Date == novaData.Date && (a.statuspagamento == "Pagar na hora" || a.statuspagamento == "Pago")).ToListAsync();
@@ -66,17 +67,17 @@ public async Task<IActionResult> ConfigurarDias()
         if (dataExistente != null)
         {
             dataExistente.Disponivel = vaiTrabalhar;
-            _context.DiaBarbeiros.Update(dataExistente);
+            _context.Diaquadras.Update(dataExistente);
         }
         else
         {
-            var novaConfig = new DiaBarbeiro
+            var novaConfig = new Diaquadra
             {
-                BarbeiroId = barbeiroId,
+                QuadraId = QuadraId,
                 Data = novaData.Date,
                 Disponivel = vaiTrabalhar
             };
-            await _context.DiaBarbeiros.AddAsync(novaConfig);
+            await _context.Diaquadras.AddAsync(novaConfig);
         }
         var alteraçoes = await _context.SaveChangesAsync();
         Console.WriteLine($"Alterações salvas: {alteraçoes}");

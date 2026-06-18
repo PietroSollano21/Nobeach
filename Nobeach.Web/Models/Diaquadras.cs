@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Barbearia.Models
+namespace Nobeach.Models
 {
-    public class DiaBarbeiro
+    public class Diaquadra
     {
         [DataType(DataType.Date)]
         public DateTime Data { get; set; }

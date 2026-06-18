@@ -10,7 +10,7 @@ using System.Linq;
 using Nobeach.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Barbearia.Controllers
+namespace Nobeach.Controllers
 {
     
     public class AgendamentoController : Controller
@@ -66,21 +66,15 @@ public async Task<IActionResult> Agendar(DateTime? dataSelecionada)
 [HttpPost("~/Home/Agendar")]
 public async Task<IActionResult> Agendar(Agendamento model)
 {
-    var barbeiroId = User.Identity.Name;
-    var emailBarbeiro = await _context.Usuarios
-    .Where(u => u.Nome == model.BarbeiroNome)
-.Select(u => u.Email)
-    .FirstOrDefaultAsync();
-var datasBloqueadas = await _context.DiaBarbeiros
+var datasBloqueadas = await _context.Diaquadras
     .Where(d => !d.Disponivel &&
                 d.Data >= DateTime.Today)
     .Select(d => d.Data.ToString("yyyy-MM-dd"))
     .ToListAsync();
     ViewBag.DatasBloqueadas = datasBloqueadas;
     Console.WriteLine($"BarbeiroId salvo no banco: {User.Identity?.Name}");
-Console.WriteLine($"BarbeiroNome do agendamento: {model.BarbeiroNome}");
- var bloqueado = await _context.DiaBarbeiros.AnyAsync(d => d.BarbeiroId == emailBarbeiro && d.Data.Date == model.Data.Date && !d.Disponivel);
-    Console.WriteLine($"Email {emailBarbeiro} encontrado para o barbeiro.");
+
+ var bloqueado = await _context.Diaquadras.AnyAsync(d => d.QuadraId == model.Quadra && d.Data.Date == model.Data.Date && !d.Disponivel);
     Console.WriteLine($"Data do agendamento: {model.Data.Date}");
     Console.WriteLine($"Quadra bloqueada nesta data? {bloqueado}");
     if(bloqueado)
@@ -95,14 +89,16 @@ Console.WriteLine($"BarbeiroNome do agendamento: {model.BarbeiroNome}");
         return RedirectToAction("Dashboard", "Home");
     }
     DateTime data = model.Data != DateTime.MinValue ? model.Data : DateTime.Today;
-    ViewBag.Quadras = Quadras;
+    var quadras = await _context.Quadras.ToListAsync();
+    ViewBag.Quadras = quadras;
     List<TimeSpan> grandeTotal = new List<TimeSpan>
     {
-        new TimeSpan(9, 0, 0),  new TimeSpan(10, 0, 0), new TimeSpan(11, 0, 0),
-        new TimeSpan(14, 0, 0), new TimeSpan(15, 0, 0), new TimeSpan(16, 0, 0),
-        new TimeSpan(17, 0, 0), new TimeSpan(18, 0, 0), new TimeSpan(19, 0, 0)
+        new TimeSpan(6,0 ,0),new TimeSpan(7, 0, 0),  new TimeSpan(8, 0, 0), new TimeSpan(9, 0, 0),
+        new TimeSpan(10, 0, 0), new TimeSpan(15, 0, 0), new TimeSpan(16, 0, 0),
+        new TimeSpan(17, 0, 0), new TimeSpan(18, 0, 0), new TimeSpan(19, 0, 0),
+        new TimeSpan(20, 0, 0), new TimeSpan(21, 0, 0)
     };
-    var repo = new AgendamentoRepository(_context, _configuration);
+    var repo = new AgendamentoRepositories(_context, _configuration);
     var ocupados = repo.BuscarHorariosOcupados(data);
     var disponiveis = grandeTotal.Where(h => !ocupados.Contains(h)).ToList();
     ViewBag.HorariosDisponiveis = disponiveis.Select(h => h.ToString(@"hh\:mm")).ToList();
