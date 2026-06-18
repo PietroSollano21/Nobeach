@@ -246,6 +246,3 @@ C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\
 C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.RazorAssemblyInfo.cache
 C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.RazorAssemblyInfo.cs
 C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.sourcelink.json
-C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.dll
-C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\refint\Nobeach.Web.dll
-C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.pdb

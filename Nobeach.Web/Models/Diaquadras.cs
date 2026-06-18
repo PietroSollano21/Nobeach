@@ -1,12 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Barbearia.Models
+namespace Nobeach.Web.Models
 {
-    public class DiaBarbeiro
+    public class Diaquadra
     {
         [DataType(DataType.Date)]
         public DateTime Data { get; set; }
-        public string QuadraId { get; set; }
+        public string QuadraId { get; set; } = null!;
         [Key]
         public int Id { get; set; }
        public bool Disponivel { get; set;}
