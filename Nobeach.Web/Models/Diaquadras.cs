@@ -1,6 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 
+<<<<<<< HEAD
 namespace Nobeach.Web.Models
+=======
+namespace Nobeach.Models
+>>>>>>> 0397fc91991435870725c4404aa070c56684960c
 {
     public class Diaquadra
     {
