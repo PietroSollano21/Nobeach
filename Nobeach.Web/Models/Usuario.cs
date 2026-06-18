@@ -17,9 +17,9 @@ public class Usuario
     public string Senha { get; set; } = string.Empty;
     public string SenhaHash { get; set; } = string.Empty;
     public string? Perfil { get; set; } = "Cliente";
-    public bool IsAdmin => Perfil == "Barbeiro" || Perfil == "Admin";
-    [Required(ErrorMessage = "O CPF é obrigatório.")]
-    [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "O CPF deve estar no formato XXX.XXX.XXX-XX.")]
-    public string? CPF {get; set;} = string.Empty;
+    public bool IsAdmin => Perfil == "Admin";
+    //[Required(ErrorMessage = "O CPF é obrigatório.")]
+    //[RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "O CPF deve estar no formato XXX.XXX.XXX-XX.")]
+   // public string? CPF {get; set;} = string.Empty;
 }
 }

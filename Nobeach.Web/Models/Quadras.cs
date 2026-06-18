@@ -9,8 +9,6 @@ namespace Nobeach.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;
-        public string Esporte { get; set; } = string.Empty;
-        public decimal ValorHora { get; set; }
-        public string? Status { get; set; } = string.Empty;
+        public bool Status { get; set; } 
     }
 }

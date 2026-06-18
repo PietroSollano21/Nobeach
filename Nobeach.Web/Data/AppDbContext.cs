@@ -13,6 +13,7 @@ namespace Nobeach.Data
         public DbSet<Agendamento> Agendamentos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Quadra> Quadras { get; set; }
+        public DbSet<Diaquadra> Diaquadras { get; set; }
     }
 }
 #pragma warning restore format
