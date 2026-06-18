@@ -236,3 +236,16 @@ C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\refint\Nobeach.W
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.pdb
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.genruntimeconfig.cache
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\ref\Nobeach.Web.dll
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.csproj.AssemblyReference.cache
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.AssemblyInfoInputs.cache
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.AssemblyInfo.cs
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.csproj.CoreCompileInputs.cache
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.RazorAssemblyInfo.cache
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.RazorAssemblyInfo.cs
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.sourcelink.json
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.dll
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\refint\Nobeach.Web.dll
+C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.pdb

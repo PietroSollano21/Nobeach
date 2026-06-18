@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Windows\\Documents\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj": {}
+    "C:\\Users\\João Victor\\Documents\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Windows\\Documents\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj": {
+    "C:\\Users\\João Victor\\Documents\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Windows\\Documents\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj",
+        "projectUniqueName": "C:\\Users\\João Victor\\Documents\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj",
         "projectName": "Nobeach.Web",
-        "projectPath": "C:\\Users\\Windows\\Documents\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj",
-        "packagesPath": "C:\\Users\\Windows\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Windows\\Documents\\Nobeach\\Nobeach.Web\\obj\\",
+        "projectPath": "C:\\Users\\João Victor\\Documents\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj",
+        "packagesPath": "C:\\Users\\João Victor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\João Victor\\Documents\\Portfólio\\Nobeach\\Nobeach.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Windows\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\João Victor\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -82,24 +82,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[9.0.11, 9.0.11]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[9.0.11, 9.0.11]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.11, 9.0.11]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[9.0.11, 9.0.11]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -108,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.315/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
