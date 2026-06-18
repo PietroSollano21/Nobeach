@@ -24,7 +24,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         options.LoginPath = "/Usuario/Login";
         options.AccessDeniedPath = "/Usuario/Login";
     });
-
+builder.Services.AddScoped<AgendamentoRepositories>();
 builder.Services.AddAuthorization();
 var app = builder.Build();
 

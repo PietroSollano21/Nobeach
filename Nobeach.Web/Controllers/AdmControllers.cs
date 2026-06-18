@@ -30,7 +30,8 @@ var usuario = await _context.Usuarios
             DateTime dataHoje = DateTime.Today;
             //var agendamentos = await _context.Agendamentos.Where(a => (a.statuspagamento == "Pagar na hora" ||  a.statuspagamento == "Pago") && a.BarbeiroNome == usuario.Nome).Where(a => a.Data.Date >= dataHoje.Date).OrderBy(a => a.Data).ThenBy(a => a.Hora).ToListAsync();
     var agendamentos = await _context.Agendamentos.Where(a => a.Data.Date >= dataHoje.Date).OrderBy(a => a.Data).ThenBy(a => a.Hora).ToListAsync();
-    return View(agendamentos);
+    var diasQuadra = await _context.Diaquadras.Where(d => d.Data >= dataHoje).OrderBy(d => d.Data).ToListAsync();
+    return View((agendamentos, diasQuadra));
         }
         
 public async Task<IActionResult> ConfigurarDias()
@@ -82,7 +83,7 @@ public async Task<IActionResult> ConfigurarDias()
         var alteraçoes = await _context.SaveChangesAsync();
         Console.WriteLine($"Alterações salvas: {alteraçoes}");
         TempData["Sucesso"] = vaiTrabalhar ? $"Esse dia {novaData.Date} foi configurado como disponível." : $"Esse dia {novaData.Date} foi configurado como folga.";
-        return RedirectToAction("Barbeiro");
+        return RedirectToAction("Admin");
         
     }   
 }
