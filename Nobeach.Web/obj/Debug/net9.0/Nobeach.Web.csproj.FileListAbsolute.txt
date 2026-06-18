@@ -249,3 +249,4 @@ C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\
 C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.dll
 C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\refint\Nobeach.Web.dll
 C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.pdb
+C:\Users\Windows\Documents\Nobeach\Nobeach.Web\bin\Debug\net9.0\BCrypt-Net-Next.dll

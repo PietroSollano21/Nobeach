@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Nobeach.Data;
 using System.Data;
+using Nobeach.Enums;
 
 namespace Nobeach.Controllers;
 
@@ -14,6 +15,11 @@ public class HomeController : Controller
 {
     private readonly AppDbContext _context;
     private readonly IConfiguration _configuration;
+    public HomeController(AppDbContext context, IConfiguration configuration)
+{
+    _context = context;
+    _configuration = configuration;
+}
     [HttpGet]
     public IActionResult Index()
     {
@@ -37,7 +43,13 @@ public class HomeController : Controller
             return RedirectToAction("Login", "Usuario");
         }
         string emailLogado = User.Identity.Name;
-        var usuario = _context.Usuarios.FirstOrDefault(u => u.Email == emailLogado);
+        Console.WriteLine($"Email logado:{emailLogado}");
+        var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == emailLogado);
+        Console.WriteLine(usuario == null ? "Usuário não encontrado" : $"Usuário encontrado: {usuario.Email}");
+         if (usuario == null)
+        {
+            return RedirectToAction("Login", "Usuario");
+        }
         if (usuario == null)
         {
             return RedirectToAction("Login", "Usuario");
@@ -56,7 +68,93 @@ public class HomeController : Controller
         ViewBag.Quadras= _context.Quadras.ToList();
         return View();
     }
+     [HttpPost]
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> ConfirmarAgendamento(
+    string nome,
+    string data,
+    string hora,
+    string quadra,
+    Esporte esporte)
+{
+    // Validação básica
+    if (string.IsNullOrWhiteSpace(nome) ||
+        string.IsNullOrWhiteSpace(data) ||
+        string.IsNullOrWhiteSpace(hora) ||
+        string.IsNullOrWhiteSpace(quadra))
+    {
+        TempData["Erro"] = "Preencha todos os campos.";
+        return RedirectToAction("Agenda");
+    }
 
+    DateTime dataAgendamento;
+    TimeSpan horaAgendamento;
+
+    if (!DateTime.TryParse(data, out dataAgendamento))
+    {
+        TempData["Erro"] = "Data inválida.";
+        return RedirectToAction("Agenda");
+    }
+
+    if (!TimeSpan.TryParse(hora, out horaAgendamento))
+    {
+        TempData["Erro"] = "Horário inválido.";
+        return RedirectToAction("Agenda");
+    }
+
+    // Não permitir datas passadas
+    if (dataAgendamento.Date < DateTime.Today)
+    {
+        TempData["Erro"] = "Não é possível agendar datas passadas.";
+        return RedirectToAction("Agenda");
+    }
+
+    // Verifica se a quadra está bloqueada para a data
+    bool quadraBloqueada = await _context.Diaquadras.AnyAsync(d =>
+        d.QuadraId == quadra &&
+        d.Data.Date == dataAgendamento.Date &&
+        !d.Disponivel);
+
+    if (quadraBloqueada)
+    {
+        TempData["Erro"] = "Esta quadra está indisponível nesta data.";
+        return RedirectToAction("Agenda");
+    }
+
+    // Verifica se já existe reserva para a mesma quadra no mesmo horário
+    bool horarioOcupado = await _context.Agendamentos.AnyAsync(a =>
+        a.Quadra == quadra &&
+        a.Data.Date == dataAgendamento.Date &&
+        a.Hora == horaAgendamento &&
+        a.Status != "Cancelado");
+
+    if (horarioOcupado)
+    {
+        TempData["Erro"] = "Este horário já está reservado.";
+        return RedirectToAction("Agenda");
+    }
+
+    string emailCliente = User.Identity?.Name ?? "";
+
+    var novoAgendamento = new Agendamento
+    {
+        NomeCliente = nome,
+        Data = dataAgendamento,
+        Hora = horaAgendamento,
+        Quadra = quadra,
+        Esporte = esporte,
+        EmailCliente = emailCliente,
+        Status = "Agendado"
+    };
+
+    _context.Agendamentos.Add(novoAgendamento);
+    await _context.SaveChangesAsync();
+
+    TempData["Sucesso"] = "Agendamento realizado com sucesso!";
+
+    return RedirectToAction("Privacy", "Home");
+}
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
