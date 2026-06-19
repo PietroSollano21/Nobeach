@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\João Victor\\Documents\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj": {}
+    "D:\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\João Victor\\Documents\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj": {
+    "D:\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\João Victor\\Documents\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj",
+        "projectUniqueName": "D:\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj",
         "projectName": "Nobeach.Web",
-        "projectPath": "C:\\Users\\João Victor\\Documents\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj",
+        "projectPath": "D:\\Portfólio\\Nobeach\\Nobeach.Web\\Nobeach.Web.csproj",
         "packagesPath": "C:\\Users\\João Victor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\João Victor\\Documents\\Portfólio\\Nobeach\\Nobeach.Web\\obj\\",
+        "outputPath": "D:\\Portfólio\\Nobeach\\Nobeach.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\João Victor\\AppData\\Roaming\\NuGet\\NuGet.Config"
