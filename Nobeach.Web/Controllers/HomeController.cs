@@ -155,6 +155,29 @@ public async Task<IActionResult> ConfirmarAgendamento(
 
     return RedirectToAction("Privacy", "Home");
 }
+[HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CancelarAgendamentos(long? id)
+    {
+        Console.WriteLine("CHEGOU");
+        var agendamento = await _context.Agendamentos.FindAsync(id);
+        if (agendamento == null)
+        {
+            return NotFound();
+        }
+        if(agendamento.Cancelado )
+        {
+            TempData["Erro"] = "Nao é possível cancelar um agendamento com menos de 6 horas de antecedência.";
+            return RedirectToAction("Privacy");
+        }
+                _context.Agendamentos.Remove(agendamento);
+         
+            await _context.SaveChangesAsync();
+            TempData["Sucesso"]= "Agendamento cancelado!";
+
+        return RedirectToAction("Privacy");
+    }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
