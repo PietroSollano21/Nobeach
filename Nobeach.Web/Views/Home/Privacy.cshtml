@@ -1,56 +1,49 @@
 ﻿@{
-    ViewData["Title"] = "Pagina principal";
+    ViewData["Title"] = "Meus Agendamentos";
 }
-<text align="center"><h1>Bem-vindo!</h1>
-<h1>Marque seu horário!</h1>
-<a align="center" href="Agenda" class="btn btn-warning">Agendar</a>
-</text>
-
 
 @model List<Nobeach.Models.Agendamento>
-    <div class="container mt-5">
-        <h2 style="text-align: center;">Meus Agendamentos</h2>
-        @if (Model == null || !Model.Any())
-        {
-            <p>Você não tem agendamentos.</p>
-        }
-        else
-        {
-           
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Hora</th>
-                        <th>Quadra</th>
-                        <th>Esporte</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var agendamento in Model)
-                    {
-                        <tr>
-                            <td>@agendamento.Data.ToString("dd/MM/yyyy")</td>
-                            <td>@agendamento.Hora</td>
-                            <td>@agendamento.Quadra</td>
-                            <td>@agendamento.Esporte</td>
-                            <td>
-                                
-                                <form action="/Home/CancelarAgendamentos" method="post">
-                                @Html.AntiForgeryToken()
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1>Meus Agendamentos</h1>
+            <p class="text-muted">Acompanhe e gerencie seus próximos agendamentos.</p>
+        </div>
+        <div>
+            <a href="/Home/Agenda" class="btn btn-success">Agendar</a>
+        </div>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-secondary">Você não tem agendamentos.</div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var agendamento in Model)
+            {
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@agendamento.Esporte</h5>
+                            <p class="card-text mb-1"><strong>Data:</strong> @agendamento.Data.ToString("dd/MM/yyyy")</p>
+                            <p class="card-text mb-1"><strong>Hora:</strong> @agendamento.Hora.ToString(@"hh\:mm")</p>
+                            <p class="card-text mb-2"><strong>Quadra:</strong> @agendamento.Quadra</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Status: @agendamento.Status</small>
+                                <form action="/Home/CancelarAgendamentos" method="post" onsubmit="return confirm('Tem certeza que deseja cancelar este agendamento?');">
+                                    @Html.AntiForgeryToken()
                                     <input type="hidden" name="id" value="@agendamento.Id" />
                                     <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
-                               </form>
-                                
-                            </td>
-                        </tr>
-                    }
-                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
                 </tbody>
-            </table>
-        }
-
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
- 

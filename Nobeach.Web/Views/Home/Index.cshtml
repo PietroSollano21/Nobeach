@@ -1,13 +1,78 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+        ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Seja Bem Vindo!</h1>
-    <br />
-    <h1>Não tem uma conta?</h1>
-    <a href="/Usuario/Cadastro" class="btn btn-primary">Crie uma agora!</a>
-    <br />
-    <h1>Já tem uma conta?</h1>
-    <a href="/Usuario/Login" class="btn btn-primary">Faça login!</a>
-</div>
+<main class="hero">
+    <div class="container-fluid p-0">
+        <div class="row align-items-stretch hero-grid">
+            <div class="col-12 col-lg-5">
+                <div class="hero-text">
+                    <h1>Beach Sports — a sua praia no meio da cidade</h1>
+                    <p class="lead">Encontre quadras, horários e parceiros para jogar vôlei de praia, futvôlei e beach tennis. Reserve agora mesmo a sua quadra.</p>
+                    <div class="mt-4">
+                        <button class="btn btn-hero btn-lg me-2" id="ctaAgendar">Agendar sua quadra</button>
+                        <button class="btn btn-outline-success btn-lg" id="ctaEntrar">Entrar / Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-7">
+                <div class="hero-image" role="img" aria-label="Jogadores na areia"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<section class="about py-5">
+    <div class="container">
+        <h2>O que é Beach Sport?</h2>
+        <p>Beach Sport representa um conjunto de modalidades jogadas na areia — competitivas ou recreativas — que valorizam o contato com a natureza, o condicionamento físico e a sociabilidade. Nosso site ajuda você a encontrar quadras, horários, e parceiros de jogo.</p>
+    </div>
+</section>
+
+<section class="sports py-5">
+    <div class="container">
+        <h2 class="mb-4">Modalidades</h2>
+        <div class="row gy-4">
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card sport-card h-100">
+                    <img src="/img/volei.svg" class="card-img-top" alt="Vôlei de Praia" />
+                    <div class="card-body">
+                        <h5 class="card-title">Vôlei de Praia</h5>
+                        <p class="card-text">Modalidade clássica em duplas — agilidade, estratégia e muita diversão na areia.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card sport-card h-100">
+                    <img src="/img/futevolei.svg" class="card-img-top" alt="Futvôlei" />
+                    <div class="card-body">
+                        <h5 class="card-title">Futvôlei</h5>
+                        <p class="card-text">Combinação de futebol e vôlei sobre a areia — técnica com os pés e controle de bola.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card sport-card h-100">
+                    <img src="/img/beachtennis.svg" class="card-img-top" alt="Beach Tennis" />
+                    <div class="card-body">
+                        <h5 class="card-title">Beach Tennis</h5>
+                        <p class="card-text">Rápido e dinâmico, jogado em duplas com raquetes específicas — ótimo para resistência e reflexos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apenas as 3 modalidades solicitadas: Vôlei de Praia, Futvôlei, Beach Tennis -->
+        </div>
+    </div>
+</section>
+
+<section class="cta py-5 text-center">
+    <div class="container">
+        <h3>Pronto para jogar?</h3>
+        <p class="mb-3">Crie sua conta e comece a buscar quadras e parceiros na sua região.</p>
+        <button class="btn btn-success btn-lg me-2" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastrar</button>
+        <button class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</button>
+    </div>
+</section>

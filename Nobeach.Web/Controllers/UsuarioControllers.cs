@@ -49,7 +49,17 @@ namespace Barbearia.Controllers
             _context.Usuarios.Add(usuario);
             _context.SaveChanges();
             
-            return RedirectToAction("Login", "Usuario");
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, usuario.Email),
+                new Claim("Id", usuario.Id.ToString()),
+                new Claim(ClaimTypes.Role, usuario.Perfil ?? "Cliente")
+            };
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties { IsPersistent = true };
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+            
+            return RedirectToAction("Index", "Home");
             }
     
         

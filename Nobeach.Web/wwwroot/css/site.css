@@ -1,16 +1,19 @@
-html {
-  font-size: 14px;
+.hero {
+  min-height: calc(100vh - 80px); /* altura fixa da seção hero */
+  background-image: url('/img/Imagem_main.svg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: stretch; /* garantir que colunas ocupem toda a altura */
+  justify-content: stretch;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+   /* impedir que elementos ultrapassem a hero */
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
 
 html {
   position: relative;
@@ -19,6 +22,9 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: #ffffff; /* white background */
+  color: #000; /* black text */
+  -webkit-font-smoothing: antialiased;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -26,6 +32,323 @@ body {
   text-align: end;
 }
 
+:root {
+  --brand-green: #28a745; /* primary green */
+  --brand-orange: #ff922b; /* primary orange */
+  --muted-light: #cfead6;
+}
+
+.navbar-dark.bg-dark {
+  background-color: #ffdc69 !important; /* light navbar */
+}
+
+.navbar-brand {
+  color: #000 !important;
+  font-weight: 700;
+}
+
+.footer {
+  background: transparent;
+  color: #333;
+}
+
+.form-control {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ced4da;
+}
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.15rem rgba(40,167,69,0.15);
+  border-color: var(--brand-green);
+}
+
+.btn-success {
+  background-color: var(--brand-green);
+  border-color: var(--brand-green);
+  color: #fff;
+}
+.btn-success:hover {
+  background-color: #1f7a38;
+}
+
+.btn-warning {
+  background-color: var(--brand-orange);
+  border-color: var(--brand-orange);
+  color: #fff;
+}
+
+a { color: #000; }
+
+.modal-content {
+  background-color: #fff;
+  color: #000;
+}
+
+/* smaller tweaks */
+.container, .container-fluid {
+  color: #000;
+}
+
+/* Homepage specific styles */
+.hero {
+  background: linear-gradient(180deg, rgba(40,167,69,0.06) 0%, rgba(255,146,43,0.03) 100%);
+}
+.hero .display-4 { color: var(--brand-green); font-weight:700; }
+.hero .lead { color: #333; max-width: 900px; margin: 0 auto; }
+
+.sports .sport-card { border: 1px solid #e9ecef; }
+.img-placeholder {
+  background: #f8f9fa;
+  border: 2px dashed #ced4da;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  font-size: 0.95rem;
+  padding: 1rem;
+}
+
+@media (min-width: 992px) {
+  .img-placeholder { height: 220px; }
+}
+
+.about h2, .sports h2 { color: #222; }
+.cta { background: linear-gradient(90deg, rgba(40,167,69,0.04), rgba(255,146,43,0.02)); }
+
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+/* Template additions (font + hero from provided design) */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Rajdhani', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 900px;
+  display : flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 60px;
+}
+.hero-content h1 {
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+}
+.hero-content .lead {
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 1.25rem;
+}
+.btn-hero {
+  display: inline-block;
+  background-color: #ff8c00;
+  color: #ffffff;
+  border: none;
+  padding: 0.85rem 1.8rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-hero:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(0,0,0,0.2); }
+
+.logo img { width: 160px; height: auto; background: #fff; padding: 6px; border-radius: 4px; }
+
+/* ensure placeholders look good on light theme */
+.img-placeholder { background: #f8f9fa; border: 2px dashed #ced4da; }
+
+/* Navbar styling with sticky positioning */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 98;
+  background: white;
+}
+
+.navbar {
+  padding: 0.5rem 1rem !important;
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(90deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%) !important;
+  border-bottom: 1px solid #ff9900 !important;
+}
+
+.navbar-brand-custom {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.navbar-brand-custom:hover {
+  transform: translateY(-2px);
+  color: #28a745 !important;
+}
+
+.navbar-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar-logo-img {
+  height: 40px;
+  width: auto;
+  transition: transform 0.2s ease;
+}
+.navbar-brand-custom:hover .navbar-logo-img {
+  transform: scale(1.05);
+}
+
+.navbar-brand-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #132b50;
+  transition: color 0.2s ease;
+}
+.navbar-brand-custom:hover .navbar-brand-text {
+  color: #28a745;
+}
+
+.navbar.scrolled {
+  padding: 0.25rem 1rem !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Two-column hero (image + text) */
+/* =========================
+   HERO SECTION
+========================= */
+
+
+
+.hero .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.hero-grid {
+  flex-direction: row;
+  align-items: stretch; /* alinhar ambas colunas na mesma linha */
+  height: 100%; /* preencher a altura do .hero */
+  width: 100%;
+  margin: 0;
+}
+
+/* =========================
+   CAIXA DE TEXTO
+========================= */
+
+.hero-text {
+  width: 100%; /* painel esquerdo ocupando 35% */
+  height: 100%; /* ocupar mesma altura da seção hero */
+  background: linear-gradient(90deg, #ffffff 0%, #f3f3f3 40%, #e6e6e6 60%); /* degradê interno do painel */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* alinhar verticalmente com flexbox */
+  align-items: flex-start; /* manter texto alinhado à esquerda */
+  padding: 80px;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+  overflow: hidden; /* garantir que nada transborde */
+}
+
+.hero-text h1 {
+  color: #132b50;
+  /* fonte proporcional, evitando corte */
+  font-size: clamp(1.4rem, 2.8vh, 2.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0 0 0.9rem 0;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.hero-text .lead {
+  color: #445;
+  /* tamanho mais discreto e proporcional ao painel */
+  font-size: clamp(0.95rem, 1.6vh, 1.15rem);
+  margin: 0 0 1rem 0;
+  max-width: 42rem;
+}
+
+/* =========================
+   IMAGEM
+========================= */
+
+.hero-image {
+  width: 100%; /* imagem ocupa 65% da área direita */
+  height: 100%; /* ocupar toda a altura do hero */
+  background-image: url('/img/Imagem_main.svg');
+  background-size: cover; /* similar a object-fit:cover */
+  background-position:  center;
+  background-repeat: no-repeat;
+  display: block;
+}
+
+/* remover restrição que estava cortando o conteúdo em telas grandes */
+@media (min-width: 1200px) {
+  .hero-text { max-height: none; }
+}
+
+/* remove qualquer overlay antigo */
+.hero-image::after {
+    display: none;
+}
+
+.hero::before {
+    display: none;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+.btn-hero {
+    background: #ff8c00;
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.btn-hero:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 992px) {
+  .hero-grid { flex-direction: column; }
+  .hero-text {
+    width: 100%;
+    height: auto;
+    padding: 2rem;
+    align-items: center;
+    text-align: center;
+    background: #ffffff; /* gradiente removido em mobile para legibilidade */
+  }
+  .hero-image { width: 100%; height: 40vh; }
+  .hero-text h1 { font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height:1.1; }
 }

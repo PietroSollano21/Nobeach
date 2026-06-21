@@ -161,9 +161,7 @@ C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\rjsmcshtml.dswa.
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\scopedcss\bundle\Nobeach.Web.styles.css
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\scopedcss\projectbundle\Nobeach.Web.bundle.scp.css
-C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\gpi1jf56ll-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\6xw57ink8n-{0}-61n19gt1b8-61n19gt1b8.gz
-C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\gx0hhkwq75-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\07rtwk1oyi-{0}-bqjiyaj88i-bqjiyaj88i.gz
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\0e4i7fz2ks-{0}-c2jlpeoesf-c2jlpeoesf.gz
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\9xarltklrg-{0}-erw9l3u2r3-erw9l3u2r3.gz
@@ -250,3 +248,10 @@ C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\
 C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\refint\Nobeach.Web.dll
 C:\Users\João Victor\Documents\Portfólio\Nobeach\Nobeach.Web\obj\Debug\net9.0\Nobeach.Web.pdb
 C:\Users\Windows\Documents\Nobeach\Nobeach.Web\bin\Debug\net9.0\BCrypt-Net-Next.dll
+C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\befq2rdhfx-{0}-kibkyc5yrn-kibkyc5yrn.gz
+C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\zn1lufp35t-{0}-afedqpz4e4-afedqpz4e4.gz
+C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\bjh26ww8x6-{0}-hl47k46007-hl47k46007.gz
+C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\sem49k7e58-{0}-vqw3aw5siz-vqw3aw5siz.gz
+C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\pu05q0zdb1-{0}-f87a54vk5s-f87a54vk5s.gz
+C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\gx0hhkwq75-{0}-ihql68mxaz-ihql68mxaz.gz
+C:\Users\Windows\Documents\Nobeach\Nobeach.Web\obj\Debug\net9.0\compressed\gpi1jf56ll-{0}-xgezd1elsk-xgezd1elsk.gz

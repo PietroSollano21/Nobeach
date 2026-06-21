@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Nobeach.Web</title>
+    <title>@ViewData["Title"] - Nobeach</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -11,13 +11,21 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-gradient border-bottom box-shadow">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Nobeach</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                @{ var brandAction = (User?.Identity?.IsAuthenticated ?? false) ? "Privacy" : "Index"; }
+                <a class="navbar-brand navbar-brand-custom" asp-area="" asp-controller="Home" asp-action="@brandAction">
+                    <div class="navbar-logo-container">
+                        <img src="/img/Logo_Nobeach.svg" alt="Nobeach Logo" class="navbar-logo-img" />
+                        <span class="navbar-brand-text">Nobeach</span>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar"></div>
             </div>
         </nav>
     </header>
@@ -28,10 +36,90 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Nobeach - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container text-center py-3">
+            &copy; 2026 - Nobeach
         </div>
     </footer>
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title">Entrar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="modalLoginForm" asp-controller="Usuario" asp-action="Login" method="post">
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="loginEmail" name="email" required />
+                                <div class="invalid-feedback" id="loginEmailFeedback">Formato de email inválido.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginSenha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="loginSenha" name="senha" required />
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success">Entrar</button>
+                            </div>
+                            <div class="mt-3 text-center">
+                                Não tem conta? <a href="#" id="openCadastroFromLogin">Cadastre-se</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cadastro Modal -->
+        <div class="modal fade" id="cadastroModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title">Cadastrar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="modalCadastroForm" asp-controller="Usuario" asp-action="Cadastro" method="post">
+                            <div class="mb-3">
+                                <label for="cadNome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="cadNome" name="nome" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="cadEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="cadEmail" name="email" required />
+                                <div class="invalid-feedback" id="cadEmailFeedback">Formato de email inválido.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cadSenha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="cadSenha" name="senha" required />
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-warning">Cadastrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <!-- Choose auth modal: shown when user clicks Agendar and is not authenticated -->
+                <div class="modal fade" id="chooseAuthModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Antes de agendar</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p>Para agendar você precisa estar logado.</p>
+                                <div class="d-grid gap-2">
+                                    <button id="chooseEntrar" class="btn btn-success">Entrar</button>
+                                    <button id="chooseCadastrar" class="btn btn-outline-secondary">Cadastrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
