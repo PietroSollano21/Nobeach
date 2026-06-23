@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 
-namespace Barbearia.Controllers
+namespace Nobeach.Controllers
 {
    
 
@@ -79,8 +79,9 @@ namespace Barbearia.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
-       [HttpPost]
- public async Task<IActionResult> Login(string email, string senha)
+
+        [HttpPost]
+        public async Task<IActionResult> Login(string email, string senha, string returnUrl)
         {
             var usuario = _context.Usuarios.FirstOrDefault(u => u.Email == email);
             if (usuario != null && !string.IsNullOrEmpty(usuario.SenhaHash) && BCrypt.Net.BCrypt.Verify(senha, usuario.SenhaHash))
@@ -103,8 +104,13 @@ namespace Barbearia.Controllers
                 {
                     return RedirectToAction("Admin", "Adm");
                 }
-                else{
-                return RedirectToAction("Privacy", "Home");
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    return RedirectToAction("Privacy", "Home");
                 }
             }
             else

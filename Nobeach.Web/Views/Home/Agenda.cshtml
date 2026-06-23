@@ -3,7 +3,7 @@
 }
 @if (TempData["Erro"] != null)
 {
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger mx-auto mt-4" role="alert" style="max-width:600px;">
         @TempData["Erro"]
     </div>
 }
@@ -13,10 +13,92 @@
 
 @using System.Collections.Generic;
 @using Nobeach.Enums;
+
+<section class="agenda-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="agenda-card">
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold">Agendar Horário</h3>
+                        <p class="text-muted mb-0">Preencha os dados abaixo para confirmar seu agendamento.</p>
+                    </div>
+                    <form method="post" action="/Home/ConfirmarAgendamento">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger mb-3" })
+
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" id="nome" name="nome" class="form-control form-control-lg" placeholder="Digite seu nome" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="data" class="form-label">Data</label>
+                            <input type="text" id="data" name="data" class="form-control form-control-lg" placeholder="Selecione a data" autocomplete="off" required value="@ViewBag.DataSelecionada" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="hora" class="form-label">Hora</label>
+                            <select id="hora" name="hora" class="form-control form-control-lg" required>
+                                <option value="">Selecione um horário</option>
+                                @{
+                                    var horarios = ViewBag.HorariosDisponiveis as IEnumerable<string>;
+                                }
+                                @if (horarios != null)
+                                {
+                                    foreach (var horario in horarios)
+                                    {
+                                        <option value="@horario">@horario</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="quadra" class="form-label">Quadra</label>
+                            <select id="quadra" name="quadra" class="form-control form-control-lg" required>
+                                <option value="">Selecione uma quadra</option>
+                                @if (ViewBag.Quadras != null)
+                                {
+                                    foreach (var quadra in (List<Nobeach.Models.Quadra>)ViewBag.Quadras)
+                                    {
+                                        <option value="@quadra.Id">Quadra @quadra.Id</option>
+                                    }
+                                    if (((List<Nobeach.Models.Quadra>)ViewBag.Quadras).Count == 0)
+                                    {
+                                        <option value="">Nenhuma quadra disponível para este horário</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="Esporte" class="form-label">Esporte</label>
+                            <select id="Esporte" name="Esporte" class="form-control form-control-lg" required>
+                                <option value="">Selecione um esporte</option>
+                                @foreach (Esporte esporte in Enum.GetValues<Esporte>())
+                                {
+                                    <option value="@esporte">@esporte</option>
+                                }
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-hero btn-lg w-100">Confirmar Agendamento</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 @section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
     <script>
+        const blockedDates = @Html.Raw(Json.Serialize(ViewBag.DatasBloqueadas ?? new List<string>()));
+
         function atualizarHorarios(data) {
-            console.log("Função disparada para a data:", data);
             if (!data) return;
 
             fetch('/Home/BuscarHorarios?DataSelecionada=' + data)
@@ -25,9 +107,7 @@
                     return response.json();
                 })
                 .then(horarios => {
-                    console.log("Horários recebidos:", horarios);
                     const selectHora = document.getElementById('hora');
-                    
                     if (selectHora) {
                         selectHora.innerHTML = '<option value="">Selecione um horário</option>';
                         horarios.forEach(horario => {
@@ -41,95 +121,16 @@
                 .catch(error => console.error('Erro no Fetch:', error));
         }
 
-        
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr("#data", {
+                locale: "pt",
+                minDate: "today",
+                dateFormat: "Y-m-d",
+                disable: blockedDates,
+                onChange: function (selectedDates, dateStr) {
+                    atualizarHorarios(dateStr);
+                }
+            });
+        });
     </script>
 }
-   <h1> horarios: @(ViewBag.HorariosDisponiveis != null ? ((IEnumerable<string>)ViewBag.HorariosDisponiveis).Count():"Nulo")</h1>
-<form method="post" action="/Home/ConfirmarAgendamento">
-    <h3>Agendar Horario</h3>
-
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" placeholder="Digite Seu nome" required>
-    <br><br>
-
-    <label for="data">Data:</label>
-    <input type="date" id="data" name="data" min="@DateTime.Today.ToString("yyyy-MM-dd")"required value="@ViewBag.DataSelecionada" onchange="atualizarHorarios(this.value)">
-    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-    <script>
-        document.addEventListener("DOMContentLoaded", function ()
-        {const inputData = document.getElementaryById("dataAgendamento");
-        const hoje = new Date();
-        const hojeFormatado = hoje.getFullYear() + '-'+
-        String(hoje.getMonth()+1).padStart(2, '0')+ '-'
-        String(hoje.getDate()).padStart(2,'0');
-        inputData.min = hojeFormatado;
-        })
-        const folgas = @Html.Raw(Json.Serialize(ViewBag.DatasBloqueadas));
-        flatpickr("#calendarioCliente",
-        {
-            locale: "pt",
-            minDate: "today",
-            dateFormat: "Y-m-d",
-            altInput: true,
-            altFormat: "d/m/Y",
-            disable: folgas
-        })
-        </script>
-    <br><br>
-
-    <label for="hora">Hora:</label>
-    <select id="hora" name="hora" required>
-        <option value="">Selecione um horário</option>
-        @{
-            var horarios = ViewBag.HorariosDisponiveis as IEnumerable<string>;
-        }
-        @if ( horarios != null)
-        {
-            foreach (var horario in horarios)
-            {
-                <option value="@horario">@horario</option>
-            }
-        }
-    </select>
-    <br><br>
-
-    <label for="quadra">Escolha uma Quadra:</label>
-    <select id="quadra" name="quadra" class="form-control" required>
-        <script>
-            fetch('/Home/BuscarFolgas?quadra=' + quadra)
-            </script>
-        <option value="">Selecione uma quadra</option>
-        @if (ViewBag.Quadras != null)
-        {
-            foreach (var quadra in (List<Nobeach.Models.Quadra>)ViewBag.Quadras)
-            {
-                <option value="@quadra.Id">@quadra.Id</option>
-            }
-            if(((List<Nobeach.Models.Quadra>)ViewBag.Quadras).Count == 0)
-            {
-                <option value="">Nenhuma quadra disponível para este horário</option>
-            }
-        }
-        
-    </select>
-    <br><br>
-
-    <label for="Esporte">Escolha um Esporte</label>
-
-<select id="Esporte" name="Esporte" class="form-control" required>
-    <option value="">Selecione um esporte</option>
-
-    @foreach (Esporte esporte in Enum.GetValues<Esporte>())
-    {
-        <option value="@esporte">@esporte</option>
-    }
-</select>
-    <
-    <button type="submit" class="btn btn-primary">Confirmar Agendamento</button>
-    @Html.AntiForgeryToken()
-</form>
-<br><br>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">

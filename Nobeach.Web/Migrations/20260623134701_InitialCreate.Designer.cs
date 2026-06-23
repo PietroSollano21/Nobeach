@@ -12,8 +12,8 @@ using Nobeach.Data;
 namespace Nobeach.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260618131007_RemoveCpf")]
-    partial class RemoveCpf
+    [Migration("20260623134701_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -63,11 +63,78 @@ public class HomeController : Controller
     .ToListAsync();
     return View(meusAgendamentos);
     }
-    public IActionResult Agenda()
+    public async Task<IActionResult> Agenda()
     {
-        ViewBag.Quadras= _context.Quadras.ToList();
+        ViewBag.Quadras = await _context.Quadras.ToListAsync();
+        var datasBloqueadas = await _context.Diaquadras
+            .Where(d => !d.Disponivel && d.Data >= DateTime.Today)
+            .Select(d => d.Data.ToString("yyyy-MM-dd"))
+            .Distinct()
+            .ToListAsync();
+        ViewBag.DatasBloqueadas = datasBloqueadas;
+
+        var data = DateTime.Today;
+        var horarios = await ObterHorariosDisponiveis(data);
+        ViewBag.DataSelecionada = data.ToString("yyyy-MM-dd");
+        ViewBag.HorariosDisponiveis = horarios;
+
         return View();
     }
+
+    [HttpGet]
+    public async Task<IActionResult> BuscarHorarios(DateTime DataSelecionada)
+    {
+        var data = DataSelecionada.Date;
+        var ocupados = await _context.Agendamentos
+            .Where(a => a.Data.Date == data && a.Status != "Cancelado")
+            .Select(a => a.Hora)
+            .ToListAsync();
+
+        var grandeTotal = new List<TimeSpan>
+        {
+            new TimeSpan(6,0,0), new TimeSpan(7,0,0), new TimeSpan(8,0,0), new TimeSpan(9,0,0),
+            new TimeSpan(10,0,0), new TimeSpan(15,0,0), new TimeSpan(16,0,0), new TimeSpan(17,0,0),
+            new TimeSpan(18,0,0), new TimeSpan(19,0,0), new TimeSpan(20,0,0), new TimeSpan(21,0,0)
+        };
+
+        if (data.DayOfWeek == DayOfWeek.Sunday)
+        {
+            grandeTotal = grandeTotal.Where(h => h <= new TimeSpan(10, 0, 0)).ToList();
+        }
+
+        var disponiveis = grandeTotal
+            .Where(h => !ocupados.Contains(h))
+            .Select(h => h.ToString(@"hh\:mm"))
+            .ToList();
+
+        return Json(disponiveis);
+    }
+
+    private async Task<List<string>> ObterHorariosDisponiveis(DateTime data)
+    {
+        var ocupados = await _context.Agendamentos
+            .Where(a => a.Data.Date == data.Date && a.Status != "Cancelado")
+            .Select(a => a.Hora)
+            .ToListAsync();
+
+        var grandeTotal = new List<TimeSpan>
+        {
+            new TimeSpan(6,0,0), new TimeSpan(7,0,0), new TimeSpan(8,0,0), new TimeSpan(9,0,0),
+            new TimeSpan(10,0,0), new TimeSpan(15,0,0), new TimeSpan(16,0,0), new TimeSpan(17,0,0),
+            new TimeSpan(18,0,0), new TimeSpan(19,0,0), new TimeSpan(20,0,0), new TimeSpan(21,0,0)
+        };
+
+        if (data.DayOfWeek == DayOfWeek.Sunday)
+        {
+            grandeTotal = grandeTotal.Where(h => h <= new TimeSpan(10, 0, 0)).ToList();
+        }
+
+        return grandeTotal
+            .Where(h => !ocupados.Contains(h))
+            .Select(h => h.ToString(@"hh\:mm"))
+            .ToList();
+    }
+
      [HttpPost]
 [HttpPost]
 [ValidateAntiForgeryToken]
@@ -107,6 +174,13 @@ public async Task<IActionResult> ConfirmarAgendamento(
     if (dataAgendamento.Date < DateTime.Today)
     {
         TempData["Erro"] = "Não é possível agendar datas passadas.";
+        return RedirectToAction("Agenda");
+    }
+
+    // Verifica se domingo tem horário permitido até 10h
+    if (dataAgendamento.DayOfWeek == DayOfWeek.Sunday && horaAgendamento > new TimeSpan(10, 0, 0))
+    {
+        TempData["Erro"] = "Nos domingos, os horários disponíveis vão somente até as 10h.";
         return RedirectToAction("Agenda");
     }
 

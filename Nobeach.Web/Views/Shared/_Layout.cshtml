@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Nobeach</title>
     <script type="importmap"></script>
+    <link rel="icon" type="img/png" href="/img/nobeachlogotipo.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Nobeach.Web.styles.css" asp-append-version="true" />
@@ -16,7 +17,7 @@
                 @{ var brandAction = (User?.Identity?.IsAuthenticated ?? false) ? "Privacy" : "Index"; }
                 <a class="navbar-brand navbar-brand-custom" asp-area="" asp-controller="Home" asp-action="@brandAction">
                     <div class="navbar-logo-container">
-                        <img src="/img/Logo_Nobeach.svg" alt="Nobeach Logo" class="navbar-logo-img" />
+                        <img src="/img/nobeachlogotipo.png" alt="Nobeach Logo" class="navbar-logo-img" />
                         <span class="navbar-brand-text">Nobeach</span>
                     </div>
                 </a>
@@ -50,6 +51,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="modalLoginForm" asp-controller="Usuario" asp-action="Login" method="post">
+                            <input type="hidden" name="returnUrl" value="/Home/Privacy" />
                             <div class="mb-3">
                                 <label for="loginEmail" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="loginEmail" name="email" required />

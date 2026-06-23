@@ -27,7 +27,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (ctaAgendar) {
 		ctaAgendar.addEventListener('click', function (e) {
 			e.preventDefault();
-			window.location.href = '/Home/Agenda';
+			if (chooseAuthModal) {
+				var modal = new bootstrap.Modal(chooseAuthModal, {});
+				modal.show();
+			} else {
+				window.location.href = '/Home/Agenda';
+			}
 		});
 	}
 

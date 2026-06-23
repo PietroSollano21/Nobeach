@@ -74,7 +74,6 @@ var datasBloqueadas = await _context.Diaquadras
     .Select(d => d.Data.ToString("yyyy-MM-dd"))
     .ToListAsync();
     ViewBag.DatasBloqueadas = datasBloqueadas;
-    Console.WriteLine($"BarbeiroId salvo no banco: {User.Identity?.Name}");
 
  var bloqueado = await _context.Diaquadras.AnyAsync(d => d.QuadraId == model.Quadra && d.Data.Date == model.Data.Date && !d.Disponivel);
     Console.WriteLine($"Data do agendamento: {model.Data.Date}");

@@ -1,6 +1,6 @@
 .hero {
   min-height: calc(100vh - 80px); /* altura fixa da seção hero */
-  background-image: url('/img/Imagem_main.svg');
+  background-image: url('/img/Nobeachhero.png');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -169,6 +169,42 @@ body {
 
 .logo img { width: 160px; height: auto; background: #fff; padding: 6px; border-radius: 4px; }
 
+.agenda-page {
+  padding: 4rem 0 6rem;
+  background: #f4f5f7;
+}
+
+.agenda-card {
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(255, 140, 0, 0.16);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+  padding: 2rem 2.25rem;
+}
+
+.agenda-card h3 {
+  color: #132b50;
+  margin-bottom: 0.5rem;
+}
+
+.agenda-card .form-label {
+  font-weight: 600;
+}
+
+.agenda-card .form-control {
+  border-radius: 1rem;
+  min-height: 3.4rem;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.agenda-card .form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 140, 0, 0.2);
+}
+
+.agenda-card .btn-hero {
+  width: 100%;
+}
+
 /* ensure placeholders look good on light theme */
 .img-placeholder { background: #f8f9fa; border: 2px dashed #ced4da; }
 
@@ -177,14 +213,18 @@ header {
   position: sticky;
   top: 0;
   z-index: 98;
-  background: white;
+  background: #ff8c00;
 }
 
 .navbar {
   padding: 0.5rem 1rem !important;
   transition: padding 0.3s ease, box-shadow 0.3s ease;
-  background: linear-gradient(90deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%) !important;
-  border-bottom: 1px solid #ff9900 !important;
+  background: #ff8c00 !important;
+  border-bottom: 1px solid #e67600 !important;
+}
+
+.navbar-toggler-icon {
+  filter: invert(1) brightness(1.2);
 }
 
 .navbar-brand-custom {
@@ -195,7 +235,7 @@ header {
 }
 .navbar-brand-custom:hover {
   transform: translateY(-2px);
-  color: #28a745 !important;
+  color: #ffffff !important;
 }
 
 .navbar-logo-container {
@@ -216,11 +256,11 @@ header {
 .navbar-brand-text {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #132b50;
+  color: #ffffff;
   transition: color 0.2s ease;
 }
 .navbar-brand-custom:hover .navbar-brand-text {
-  color: #28a745;
+  color: #ffffff;
 }
 
 .navbar.scrolled {
@@ -295,9 +335,9 @@ header {
 .hero-image {
   width: 100%; /* imagem ocupa 65% da área direita */
   height: 100%; /* ocupar toda a altura do hero */
-  background-image: url('/img/Imagem_main.svg');
+  background-image: url('/img/Nobeachhero.png');
   background-size: cover; /* similar a object-fit:cover */
-  background-position:  center;
+  background-position: center;
   background-repeat: no-repeat;
   display: block;
 }

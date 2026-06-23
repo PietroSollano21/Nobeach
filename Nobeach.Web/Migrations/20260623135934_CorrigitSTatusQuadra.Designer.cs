@@ -12,8 +12,8 @@ using Nobeach.Data;
 namespace Nobeach.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260617141927_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260623135934_CorrigitSTatusQuadra")]
+    partial class CorrigitSTatusQuadra
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,9 +53,36 @@ namespace Nobeach.Web.Migrations
                     b.Property<string>("Quadra")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.ToTable("agendamento");
+                });
+
+            modelBuilder.Entity("Nobeach.Models.Diaquadra", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("Disponivel")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("QuadraId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Diaquadras");
                 });
 
             modelBuilder.Entity("Nobeach.Models.Quadra", b =>
@@ -66,19 +93,12 @@ namespace Nobeach.Web.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Esporte")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("longtext");
-
-                    b.Property<decimal>("ValorHora")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 
@@ -92,10 +112,6 @@ namespace Nobeach.Web.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CPF")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .IsRequired()
