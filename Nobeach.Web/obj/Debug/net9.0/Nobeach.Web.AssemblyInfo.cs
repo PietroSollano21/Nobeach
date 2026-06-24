@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Nobeach.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3dd259f0960dd2708030f32b8bcb572f7895a87b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+050bb1d2cb64c86ee37f3941bdd87c25063e8d23")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nobeach.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Nobeach.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
