@@ -41,7 +41,9 @@
             &copy; 2026 - Nobeach
         </div>
     </footer>
-        <!-- Login Modal -->
+          @* Login Modal: envia POST para UsuarioController.Login. 
+              O campo hidden `returnUrl` indica para onde redirecionar após login. *@
+          <!-- Login Modal -->
         <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -51,7 +53,8 @@
                     </div>
                     <div class="modal-body">
                         <form id="modalLoginForm" asp-controller="Usuario" asp-action="Login" method="post">
-                            <input type="hidden" name="returnUrl" value="/Home/Privacy" />
+                            @* returnUrl: destino depois do login (Privacy por padrão) *@
+                            <input type="hidden" name="returnUrl" value="@(ViewBag.ReturnUrl ?? "/Home/Privacy")" />
                             <div class="mb-3">
                                 <label for="loginEmail" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="loginEmail" name="email" required />
@@ -64,6 +67,10 @@
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-success">Entrar</button>
                             </div>
+                            @if (ViewBag.Error != null)
+                            {
+                                <div class="alert alert-danger mt-3">@ViewBag.Error</div>
+                            }
                             <div class="mt-3 text-center">
                                 Não tem conta? <a href="#" id="openCadastroFromLogin">Cadastre-se</a>
                             </div>
@@ -125,6 +132,18 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @if (ViewBag.Error != null)
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var loginModal = document.getElementById('loginModal');
+                if (loginModal) {
+                    var modal = new bootstrap.Modal(loginModal, {});
+                    modal.show();
+                }
+            });
+        </script>
+    }
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

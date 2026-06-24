@@ -32,6 +32,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtL0FkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/wellington/Nobeach/Nobeach.Web/Views/Adm/ConfigurarDias.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtL0NvbmZpZ3VyYXJEaWFzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/wellington/Nobeach/Nobeach.Web/Views/Home/Agenda.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9BZ2VuZGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

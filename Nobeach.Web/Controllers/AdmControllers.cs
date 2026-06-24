@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Nobeach.Controllers
 {
+    // Controller administrativo — gerencia o painel do admin e configurações de dias
     public class AdmController : Controller
     {
         private readonly AppDbContext _context;
@@ -18,13 +19,14 @@ namespace Nobeach.Controllers
             _context = context;
         }
         [Authorize(Roles = "Admin")]
+        // Página principal do administrador: lista agendamentos e dias configurados
         public async Task<IActionResult> Admin()
         {
             var admLogado = User.Identity?.Name;
 var usuario = await _context.Usuarios
     .FirstOrDefaultAsync(u => u.Email == admLogado);
             if (usuario == null || usuario.Perfil != "Admin")            {
-                return RedirectToAction("Login", "Usuario");
+                return RedirectToAction("Index", "Home");
             }
 
             DateTime dataHoje = DateTime.Today;
@@ -34,7 +36,8 @@ var usuario = await _context.Usuarios
     return View((agendamentos, diasQuadra));
         }
         
-public async Task<IActionResult> ConfigurarDias()
+        // View para configurar dias (folgas / dias disponíveis)
+        public async Task<IActionResult> ConfigurarDias()
     {
 
         var datasconfig = _context.Diaquadras.Where(d => d.Data >= DateTime.Today).OrderBy(d => d.Data).ToList();
@@ -44,6 +47,8 @@ public async Task<IActionResult> ConfigurarDias()
     [HttpPost]
     [Authorize]
     [ValidateAntiForgeryToken]
+    // Recebe a data e o status (Disponível / Folga) para gravar no banco.
+    // Se marcar como folga, cancela agendamentos existentes para essa data.
     public async Task<IActionResult> DataExata(DateTime novaData, string status)
     {
         if(novaData == DateTime.MinValue || string.IsNullOrEmpty(status))
@@ -85,6 +90,28 @@ public async Task<IActionResult> ConfigurarDias()
         TempData["Sucesso"] = vaiTrabalhar ? $"Esse dia {novaData.Date} foi configurado como disponível." : $"Esse dia {novaData.Date} foi configurado como folga.";
         return RedirectToAction("Admin");
         
+    }
+    
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    // Cancela uma folga existente (marca como disponível)
+    public async Task<IActionResult> CancelarFolga(DateTime data)
+    {
+        var folga = await _context.Diaquadras.FirstOrDefaultAsync(d => d.Data.Date == data.Date && !d.Disponivel);
+        
+        if (folga != null)
+        {
+            folga.Disponivel = true;
+            _context.Diaquadras.Update(folga);
+            await _context.SaveChangesAsync();
+            TempData["Sucesso"] = $"Folga de {data.Date:dd/MM/yyyy} foi cancelada.";
+        }
+        else
+        {
+            TempData["Erro"] = "Folga não encontrada.";
+        }
+        
+        return RedirectToAction("Admin");
     }   
 }
 }

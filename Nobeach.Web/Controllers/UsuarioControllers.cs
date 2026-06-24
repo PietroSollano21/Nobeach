@@ -17,23 +17,28 @@ using System.Collections.Generic;
 
 namespace Nobeach.Controllers
 {
-   
-
+    // Controller responsável por operações relacionadas a usuários:
+    // - Cadastro de novos usuários
+    // - Autenticação (login / logout)
+    // - Redirecionamentos pós-login conforme perfil
 
     public class UsuarioController : Controller
     {
         private readonly AppDbContext _context;
 
+        // Injeção do contexto de dados (EF Core)
         public UsuarioController(AppDbContext context)
         {
             _context = context;
         }
         [HttpGet]
+        // Formulário de cadastro (GET)
         public IActionResult Cadastro()
         {
             return View();
         }
         [HttpPost]
+        // Recebe o POST do formulário de cadastro, cria usuário e autentica
         public async Task<IActionResult> Cadastro([Bind("Id,Nome,Email,Senha")] Usuario usuario)
         {
             var usuarioExistente = _context.Usuarios.FirstOrDefault(u => u.Email == usuario.Email || u.Nome == usuario.Nome); ;
@@ -69,18 +74,23 @@ namespace Nobeach.Controllers
 
 
         [HttpGet]
-        public IActionResult Login()
+        // Página de login (GET). Também usada quando o modal não é empregado.
+        public IActionResult Login(string returnUrl = "/Home/Privacy")
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
         
+        // Logout do usuário — limpa o cookie de autenticação
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
+        // Autenticação: valida email/senha, cria claims e redireciona
+        // Se o usuário for admin, envia para /Adm/Admin; senão para returnUrl ou /Home/Privacy
         public async Task<IActionResult> Login(string email, string senha, string returnUrl)
         {
             var usuario = _context.Usuarios.FirstOrDefault(u => u.Email == email);
@@ -96,9 +106,8 @@ namespace Nobeach.Controllers
                 var authProperties = new AuthenticationProperties
                 {
                     IsPersistent = true,
-                    
                 };
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
                
                if(usuario.IsAdmin)
                 {
@@ -115,11 +124,13 @@ namespace Nobeach.Controllers
             }
             else
             {
-            ViewBag.Error = "Email ou senha inválidos.";
-            return View();
+                ViewBag.Error = "Email ou senha inválidos.";
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
             }
         }
         [Authorize]
+        // Exemplo de rota protegida que encaminha administradores ao painel
         public IActionResult Dashboard()
         {
             if (User.Identity.IsAuthenticated || User.IsInRole("Admin"))

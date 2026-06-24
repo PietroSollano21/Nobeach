@@ -3,14 +3,14 @@
     <StaticWebAssetEndpoint Include="_content/Nobeach.Web/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-dYl0MLEa/iMM1S\u002BP3DHWOu4BTuIyzG8wGCwXm/eA67M="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8598"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022dYl0MLEa/iMM1S\u002BP3DHWOu4BTuIyzG8wGCwXm/eA67M=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 15:04:43 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Fu83W4CyfF1891MDNxgbFOhbDcsi6Ki78SdbgRC6nvw="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"9009"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Fu83W4CyfF1891MDNxgbFOhbDcsi6Ki78SdbgRC6nvw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 22:33:30 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/Nobeach.Web/css/site.dmlchg6hd1.css">
+    <StaticWebAssetEndpoint Include="_content/Nobeach.Web/css/site.mkbqehosdt.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"dmlchg6hd1"},{"Name":"integrity","Value":"sha256-dYl0MLEa/iMM1S\u002BP3DHWOu4BTuIyzG8wGCwXm/eA67M="},{"Name":"label","Value":"_content/Nobeach.Web/css/site.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8598"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022dYl0MLEa/iMM1S\u002BP3DHWOu4BTuIyzG8wGCwXm/eA67M=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 15:04:43 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"mkbqehosdt"},{"Name":"integrity","Value":"sha256-Fu83W4CyfF1891MDNxgbFOhbDcsi6Ki78SdbgRC6nvw="},{"Name":"label","Value":"_content/Nobeach.Web/css/site.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"9009"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Fu83W4CyfF1891MDNxgbFOhbDcsi6Ki78SdbgRC6nvw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 22:33:30 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Nobeach.Web/favicon.61n19gt1b8.ico">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))</AssetFile>
@@ -47,6 +47,18 @@
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Z\u002BdM46fxPnr2A\u002BBxARBd\u002B6\u002BBTFUeg6I1qeXzuI40rNo="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"421"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u0022Z\u002BdM46fxPnr2A\u002BBxARBd\u002B6\u002BBTFUeg6I1qeXzuI40rNo=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 01:03:20 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Nobeach.Web/img/chatgpt-hero.b51dmhfdok.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\chatgpt-hero.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"b51dmhfdok"},{"Name":"integrity","Value":"sha256-DzFVbyKD/wgQ/CgQV4p5SFQET\u002BkQ02X8i69vXI2Wti4="},{"Name":"label","Value":"_content/Nobeach.Web/img/chatgpt-hero.png"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1738162"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022DzFVbyKD/wgQ/CgQV4p5SFQET\u002BkQ02X8i69vXI2Wti4=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 21:34:39 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Nobeach.Web/img/chatgpt-hero.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\chatgpt-hero.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-DzFVbyKD/wgQ/CgQV4p5SFQET\u002BkQ02X8i69vXI2Wti4="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"1738162"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022DzFVbyKD/wgQ/CgQV4p5SFQET\u002BkQ02X8i69vXI2Wti4=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 21:34:39 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Nobeach.Web/img/futevolei.a49y9znztv.svg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\futevolei.svg'))</AssetFile>
@@ -120,6 +132,18 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Ri8mnyRQZMReu082gpDOBonwwWGAv3e\u002BbfG2wT1Hbm4="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"28816"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022Ri8mnyRQZMReu082gpDOBonwwWGAv3e\u002BbfG2wT1Hbm4=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 11:49:55 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Nobeach.Web/img/volei-praia.2m5voblfh2.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\volei-praia.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"2m5voblfh2"},{"Name":"integrity","Value":"sha256-KmJd\u002BrnYg6A/gF4pjk7NIDGwfelMxjv9xi3X90MKN3I="},{"Name":"label","Value":"_content/Nobeach.Web/img/volei-praia.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"325877"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022KmJd\u002BrnYg6A/gF4pjk7NIDGwfelMxjv9xi3X90MKN3I=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 22:12:02 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Nobeach.Web/img/volei-praia.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\volei-praia.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-KmJd\u002BrnYg6A/gF4pjk7NIDGwfelMxjv9xi3X90MKN3I="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"325877"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022KmJd\u002BrnYg6A/gF4pjk7NIDGwfelMxjv9xi3X90MKN3I=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 22:12:02 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Nobeach.Web/img/volei.cr6sip76r3.png">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\volei.png'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
@@ -144,17 +168,17 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-jrtrd2gZuYpTyRZ0dn4hW2KqBej9Ud5W58WOV3tTSak="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"424"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u0022jrtrd2gZuYpTyRZ0dn4hW2KqBej9Ud5W58WOV3tTSak=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 01:03:20 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Nobeach.Web/js/site.420c6twtsl.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"420c6twtsl"},{"Name":"integrity","Value":"sha256-tNqJ3P0jTxb18nXQcZcTztCCOge5DoJxi9bHt9Xhm8I="},{"Name":"label","Value":"_content/Nobeach.Web/js/site.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4585"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022tNqJ3P0jTxb18nXQcZcTztCCOge5DoJxi9bHt9Xhm8I=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 22:54:07 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Nobeach.Web/js/site.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-gFBGWNOyy1kXe7402wAYcv76KxriNUF5p32rGkbHb0o="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4175"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022gFBGWNOyy1kXe7402wAYcv76KxriNUF5p32rGkbHb0o=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 14:42:49 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/Nobeach.Web/js/site.k38e0wvzep.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"k38e0wvzep"},{"Name":"integrity","Value":"sha256-gFBGWNOyy1kXe7402wAYcv76KxriNUF5p32rGkbHb0o="},{"Name":"label","Value":"_content/Nobeach.Web/js/site.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4175"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022gFBGWNOyy1kXe7402wAYcv76KxriNUF5p32rGkbHb0o=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 14:42:49 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-tNqJ3P0jTxb18nXQcZcTztCCOge5DoJxi9bHt9Xhm8I="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4585"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022tNqJ3P0jTxb18nXQcZcTztCCOge5DoJxi9bHt9Xhm8I=\u0022"},{"Name":"Last-Modified","Value":"Tue, 23 Jun 2026 22:54:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Nobeach.Web/lib/bootstrap/dist/css/bootstrap-grid.bqjiyaj88i.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-grid.css'))</AssetFile>

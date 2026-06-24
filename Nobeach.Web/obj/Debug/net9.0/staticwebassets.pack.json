@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets/img/beachtennis.svg"
     },
     {
+      "Id": "/home/wellington/Nobeach/Nobeach.Web/wwwroot/img/chatgpt-hero.png",
+      "PackagePath": "staticwebassets/img/chatgpt-hero.png"
+    },
+    {
       "Id": "/home/wellington/Nobeach/Nobeach.Web/wwwroot/img/futevolei.png",
       "PackagePath": "staticwebassets/img/futevolei.png"
     },
@@ -43,6 +47,10 @@
     {
       "Id": "/home/wellington/Nobeach/Nobeach.Web/wwwroot/img/nobeachlogotipo.png",
       "PackagePath": "staticwebassets/img/nobeachlogotipo.png"
+    },
+    {
+      "Id": "/home/wellington/Nobeach/Nobeach.Web/wwwroot/img/volei-praia.jpg",
+      "PackagePath": "staticwebassets/img/volei-praia.jpg"
     },
     {
       "Id": "/home/wellington/Nobeach/Nobeach.Web/wwwroot/img/volei.png",

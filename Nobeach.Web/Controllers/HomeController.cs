@@ -40,7 +40,7 @@ public class HomeController : Controller
         }
          if (User == null || User.Identity == null || string.IsNullOrEmpty(User.Identity.Name))
         {
-            return RedirectToAction("Login", "Usuario");
+            return RedirectToAction("Index", "Home");
         }
         string emailLogado = User.Identity.Name;
         Console.WriteLine($"Email logado:{emailLogado}");
@@ -48,11 +48,11 @@ public class HomeController : Controller
         Console.WriteLine(usuario == null ? "Usuário não encontrado" : $"Usuário encontrado: {usuario.Email}");
          if (usuario == null)
         {
-            return RedirectToAction("Login", "Usuario");
+            return RedirectToAction("Index", "Home");
         }
         if (usuario == null)
         {
-            return RedirectToAction("Login", "Usuario");
+            return RedirectToAction("Index", "Home");
         }
         DateTime dataHoje = DateTime.Today;
        var meusAgendamentos = await _context.Agendamentos

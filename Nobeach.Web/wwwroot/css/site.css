@@ -1,5 +1,5 @@
 .hero {
-  min-height: calc(100vh - 80px); /* altura fixa da seção hero */
+  height: 120vh; /* altura ainda maior */
   background-image: url('/img/Nobeachhero.png');
   background-size: cover;
   background-position: center;
@@ -7,11 +7,12 @@
   display: flex;
   align-items: stretch; /* garantir que colunas ocupem toda a altura */
   justify-content: stretch;
-  padding: 0;
-  margin: 0;
-  width: 100%;
+  width: 100vw; /* 100% da viewport width */
+  max-width: 100vw; /* sem limite de largura */
   overflow: hidden;
-   /* impedir que elementos ultrapassem a hero */
+  margin: 0; /* sobrepor a navbar */
+  margin-left: calc(-50vw + 50%);
+  padding: 0; /* compensar para o conteúdo não ficar sob a navbar */
 }
 
 
@@ -143,7 +144,7 @@ body {
 .hero-content h1 {
   color: #ffffff;
   text-transform: uppercase;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
   line-height: 1.05;
   letter-spacing: 0.12em;
   margin-bottom: 1rem;
@@ -151,14 +152,16 @@ body {
 .hero-content .lead {
   color: rgba(255,255,255,0.9);
   margin-bottom: 1.25rem;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  line-height: 1.6;
 }
 .btn-hero {
   display: inline-block;
   background-color: #ff8c00;
   color: #ffffff;
   border: none;
-  padding: 0.85rem 1.8rem;
-  font-size: 0.95rem;
+  padding: clamp(0.75rem, 2vw, 1.2rem) clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
   text-transform: uppercase;
   font-weight: 700;
   border-radius: 999px;
@@ -275,11 +278,12 @@ header {
 
 
 
-.hero .container {
+.hero .container-fluid {
     width: 100%;
     max-width: 100%;
     padding: 0;
     margin: 0;
+    height: 100%;
 }
 
 .hero-grid {
@@ -288,8 +292,13 @@ header {
   height: 100%; /* preencher a altura do .hero */
   width: 100%;
   margin: 0;
+  padding: 0;
 }
 
+.hero-grid > div {
+  padding: 0; /* remover padding padrão do Bootstrap */
+  height: 100%; /* garantir que cada coluna ocupe toda a altura */
+}
 /* =========================
    CAIXA DE TEXTO
 ========================= */
@@ -302,20 +311,19 @@ header {
   flex-direction: column;
   justify-content: center; /* alinhar verticalmente com flexbox */
   align-items: flex-start; /* manter texto alinhado à esquerda */
-  padding: 80px;
+  padding: 6rem;
   position: relative;
   z-index: 2;
   box-sizing: border-box;
-  overflow: hidden; /* garantir que nada transborde */
 }
 
 .hero-text h1 {
   color: #132b50;
   /* fonte proporcional, evitando corte */
-  font-size: clamp(1.4rem, 2.8vh, 2.4rem);
+  font-size: clamp(3rem, 6vh, 5rem);
   font-weight: 800;
   line-height: 1.05;
-  margin: 0 0 0.9rem 0;
+  margin: 0 0 1.5rem 0;
   max-width: 100%;
   word-break: break-word;
 }
@@ -323,23 +331,28 @@ header {
 .hero-text .lead {
   color: #445;
   /* tamanho mais discreto e proporcional ao painel */
-  font-size: clamp(0.95rem, 1.6vh, 1.15rem);
-  margin: 0 0 1rem 0;
+  font-size: clamp(1.5rem, 3vh, 1.9rem);
+  margin: 0 0 2rem 0;
   max-width: 42rem;
+  line-height: 1.8;
 }
 
 /* =========================
    IMAGEM
 ========================= */
-
+.hero-image{
+  overflow: hidden;
+}
 .hero-image {
   width: 100%; /* imagem ocupa 65% da área direita */
   height: 100%; /* ocupar toda a altura do hero */
   background-image: url('/img/Nobeachhero.png');
-  background-size: cover; /* similar a object-fit:cover */
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: block;
+  flex: 1;
+  object-fit: cover;
 }
 
 /* remover restrição que estava cortando o conteúdo em telas grandes */

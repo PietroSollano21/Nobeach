@@ -23,10 +23,23 @@ document.addEventListener('DOMContentLoaded', function () {
 	var ctaAgendar = document.getElementById('ctaAgendar');
 	var ctaEntrar = document.getElementById('ctaEntrar');
 	var chooseAuthModal = document.getElementById('chooseAuthModal');
+	var loginModalForm = document.getElementById('modalLoginForm');
+	var pendingReturnUrl = '/Home/Privacy';
+
+	function setLoginReturnUrl(url) {
+		pendingReturnUrl = url;
+		if (loginModalForm) {
+			var returnInput = loginModalForm.querySelector('input[name="returnUrl"]');
+			if (returnInput) {
+				returnInput.value = url;
+			}
+		}
+	}
 
 	if (ctaAgendar) {
 		ctaAgendar.addEventListener('click', function (e) {
 			e.preventDefault();
+			setLoginReturnUrl('/Home/Agenda');
 			if (chooseAuthModal) {
 				var modal = new bootstrap.Modal(chooseAuthModal, {});
 				modal.show();
@@ -39,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (ctaEntrar) {
 		ctaEntrar.addEventListener('click', function (e) {
 			e.preventDefault();
+			setLoginReturnUrl('/Home/Privacy');
 			if (chooseAuthModal) {
 				var modal = new bootstrap.Modal(chooseAuthModal, {});
 				modal.show();

@@ -1,6 +1,9 @@
 @{
     ViewData["Title"] = "Agendamento";
 }
+@* Página de agendamento: permite escolher data, horário, quadra e esporte.
+   O calendário desabilita datas marcadas como folga (carregadas em ViewBag.DatasBloqueadas).
+   O select de horários é preenchido via ViewBag.HorariosDisponiveis ou por AJAX. *@
 @if (TempData["Erro"] != null)
 {
     <div class="alert alert-danger mx-auto mt-4" role="alert" style="max-width:600px;">
@@ -22,6 +25,14 @@
                     <div class="text-center mb-4">
                         <h3 class="fw-bold">Agendar Horário</h3>
                         <p class="text-muted mb-0">Preencha os dados abaixo para confirmar seu agendamento.</p>
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>⚠️ Informações Importantes:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li><strong>Valor:</strong> R$ 80,00</li>
+                            <li><strong>Pagamento:</strong> No local</li>
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <form method="post" action="/Home/ConfirmarAgendamento">
                         @Html.AntiForgeryToken()
