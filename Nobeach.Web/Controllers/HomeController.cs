@@ -90,19 +90,7 @@ public class HomeController : Controller
             .Select(a => a.Hora)
             .ToListAsync();
 
-        var grandeTotal = new List<TimeSpan>
-        {
-            new TimeSpan(6,0,0), new TimeSpan(7,0,0), new TimeSpan(8,0,0), new TimeSpan(9,0,0),
-            new TimeSpan(10,0,0), new TimeSpan(15,0,0), new TimeSpan(16,0,0), new TimeSpan(17,0,0),
-            new TimeSpan(18,0,0), new TimeSpan(19,0,0), new TimeSpan(20,0,0), new TimeSpan(21,0,0)
-        };
-
-        if (data.DayOfWeek == DayOfWeek.Sunday)
-        {
-            grandeTotal = grandeTotal.Where(h => h <= new TimeSpan(10, 0, 0)).ToList();
-        }
-
-        var disponiveis = grandeTotal
+        var disponiveis = ObterHorariosBase(data)
             .Where(h => !ocupados.Contains(h))
             .Select(h => h.ToString(@"hh\:mm"))
             .ToList();
@@ -117,6 +105,14 @@ public class HomeController : Controller
             .Select(a => a.Hora)
             .ToListAsync();
 
+        return ObterHorariosBase(data)
+            .Where(h => !ocupados.Contains(h))
+            .Select(h => h.ToString(@"hh\:mm"))
+            .ToList();
+    }
+
+    private List<TimeSpan> ObterHorariosBase(DateTime data)
+    {
         var grandeTotal = new List<TimeSpan>
         {
             new TimeSpan(6,0,0), new TimeSpan(7,0,0), new TimeSpan(8,0,0), new TimeSpan(9,0,0),
@@ -129,10 +125,7 @@ public class HomeController : Controller
             grandeTotal = grandeTotal.Where(h => h <= new TimeSpan(10, 0, 0)).ToList();
         }
 
-        return grandeTotal
-            .Where(h => !ocupados.Contains(h))
-            .Select(h => h.ToString(@"hh\:mm"))
-            .ToList();
+        return grandeTotal;
     }
 
      [HttpPost]
@@ -141,50 +134,63 @@ public class HomeController : Controller
 public async Task<IActionResult> ConfirmarAgendamento(
     string nome,
     string data,
-    string hora,
+    string[] horas,
     string quadra,
     Esporte esporte)
 {
     // Validação básica
     if (string.IsNullOrWhiteSpace(nome) ||
         string.IsNullOrWhiteSpace(data) ||
-        string.IsNullOrWhiteSpace(hora) ||
+        horas == null || horas.Length == 0 ||
         string.IsNullOrWhiteSpace(quadra))
     {
-        TempData["Erro"] = "Preencha todos os campos.";
+        TempData["Erro"] = "Preencha todos os campos e selecione pelo menos um horário.";
         return RedirectToAction("Agenda");
     }
 
     DateTime dataAgendamento;
-    TimeSpan horaAgendamento;
-
     if (!DateTime.TryParse(data, out dataAgendamento))
     {
         TempData["Erro"] = "Data inválida.";
         return RedirectToAction("Agenda");
     }
 
-    if (!TimeSpan.TryParse(hora, out horaAgendamento))
-    {
-        TempData["Erro"] = "Horário inválido.";
-        return RedirectToAction("Agenda");
-    }
-
-    // Não permitir datas passadas
     if (dataAgendamento.Date < DateTime.Today)
     {
         TempData["Erro"] = "Não é possível agendar datas passadas.";
         return RedirectToAction("Agenda");
     }
 
-    // Verifica se domingo tem horário permitido até 10h
-    if (dataAgendamento.DayOfWeek == DayOfWeek.Sunday && horaAgendamento > new TimeSpan(10, 0, 0))
+    var horariosSelecionados = horas
+        .Where(h => !string.IsNullOrWhiteSpace(h))
+        .Select(h => h.Trim())
+        .Distinct()
+        .ToList();
+
+    if (horariosSelecionados.Count == 0)
     {
-        TempData["Erro"] = "Nos domingos, os horários disponíveis vão somente até as 10h.";
+        TempData["Erro"] = "Selecione pelo menos um horário válido.";
         return RedirectToAction("Agenda");
     }
 
-    // Verifica se a quadra está bloqueada para a data
+    var horariosTimeSpan = new List<TimeSpan>();
+    foreach (var horaValor in horariosSelecionados)
+    {
+        if (!TimeSpan.TryParse(horaValor, out var horaAgendamento))
+        {
+            TempData["Erro"] = $"Horário inválido: {horaValor}.";
+            return RedirectToAction("Agenda");
+        }
+
+        if (dataAgendamento.DayOfWeek == DayOfWeek.Sunday && horaAgendamento > new TimeSpan(15, 0, 0))
+        {
+            TempData["Erro"] = "Nos domingos, os horários disponíveis vão somente até as 10h.";
+            return RedirectToAction("Agenda");
+        }
+
+        horariosTimeSpan.Add(horaAgendamento);
+    }
+
     bool quadraBloqueada = await _context.Diaquadras.AnyAsync(d =>
         d.QuadraId == quadra &&
         d.Data.Date == dataAgendamento.Date &&
@@ -196,33 +202,41 @@ public async Task<IActionResult> ConfirmarAgendamento(
         return RedirectToAction("Agenda");
     }
 
-    // Verifica se já existe reserva para a mesma quadra no mesmo horário
-    bool horarioOcupado = await _context.Agendamentos.AnyAsync(a =>
-        a.Quadra == quadra &&
-        a.Data.Date == dataAgendamento.Date &&
-        a.Hora == horaAgendamento &&
-        a.Status != "Cancelado");
+    var horariosExistentes = await _context.Agendamentos
+        .Where(a => a.Quadra == quadra &&
+                    a.Data.Date == dataAgendamento.Date &&
+                    a.Status != "Cancelado")
+        .Select(a => a.Hora)
+        .ToListAsync();
 
-    if (horarioOcupado)
+    var conflitos = horariosTimeSpan
+        .Where(h => horariosExistentes.Contains(h))
+        .Select(h => h.ToString(@"hh\:mm"))
+        .ToList();
+
+    if (conflitos.Any())
     {
-        TempData["Erro"] = "Este horário já está reservado.";
+        TempData["Erro"] = $"Os seguintes horários já estão reservados: {string.Join(", ", conflitos)}.";
         return RedirectToAction("Agenda");
     }
 
     string emailCliente = User.Identity?.Name ?? "";
 
-    var novoAgendamento = new Agendamento
+    foreach (var horaAgendamento in horariosTimeSpan)
     {
-        NomeCliente = nome,
-        Data = dataAgendamento,
-        Hora = horaAgendamento,
-        Quadra = quadra,
-        Esporte = esporte,
-        EmailCliente = emailCliente,
-        Status = "Agendado"
-    };
+        var novoAgendamento = new Agendamento
+        {
+            NomeCliente = nome,
+            Data = dataAgendamento,
+            Hora = horaAgendamento,
+            Quadra = quadra,
+            Esporte = esporte,
+            EmailCliente = emailCliente,
+            Status = "Agendado"
+        };
+        _context.Agendamentos.Add(novoAgendamento);
+    }
 
-    _context.Agendamentos.Add(novoAgendamento);
     await _context.SaveChangesAsync();
 
     TempData["Sucesso"] = "Agendamento realizado com sucesso!";

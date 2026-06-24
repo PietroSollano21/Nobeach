@@ -31,39 +31,71 @@
                         <ul class="mb-0 mt-2">
                             <li><strong>Valor:</strong> R$ 80,00</li>
                             <li><strong>Pagamento:</strong> No local</li>
+                            <p><strong>Não é possível trocar o esporte após o agendamento</strong>
+                            <p><strong>55 minutos de uso<strong><p>
                         </ul>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <form method="post" action="/Home/ConfirmarAgendamento">
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(false, "", new { @class = "text-danger mb-3" })
+<div class="mb-3">
+    <label for="nome" class="form-label">Nome</label>
 
-                        <div class="mb-3">
-                            <label for="nome" class="form-label">Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control form-control-lg" placeholder="Digite seu nome" required />
-                        </div>
+    <input type="text"
+           id="nome"
+           name="nome"
+           class="form-control form-control-lg"
+           required />
+</div>
+<div class="mb-3">
+    <label for="data" class="form-label">Data</label>
 
-                        <div class="mb-3">
-                            <label for="data" class="form-label">Data</label>
-                            <input type="text" id="data" name="data" class="form-control form-control-lg" placeholder="Selecione a data" autocomplete="off" required value="@ViewBag.DataSelecionada" />
-                        </div>
+    <input type="text"
+           id="data"
+           name="data"
+           class="form-control form-control-lg"
+           value="@ViewBag.DataSelecionada"
+           required />
+</div>
+<div class="mb-3">
+    <label class="form-label">Horários</label>
 
-                        <div class="mb-3">
-                            <label for="hora" class="form-label">Hora</label>
-                            <select id="hora" name="hora" class="form-control form-control-lg" required>
-                                <option value="">Selecione um horário</option>
-                                @{
-                                    var horarios = ViewBag.HorariosDisponiveis as IEnumerable<string>;
-                                }
-                                @if (horarios != null)
-                                {
-                                    foreach (var horario in horarios)
-                                    {
-                                        <option value="@horario">@horario</option>
-                                    }
-                                }
-                            </select>
-                        </div>
+    <div id="horariosContainer" class="row row-cols-2 row-cols-md-3 g-2">
+
+        @{
+            var horarios = ViewBag.HorariosDisponiveis as IEnumerable<string>;
+        }
+
+        @if (horarios != null)
+        {
+            foreach (var horario in horarios)
+            {
+                var horarioId = horario.Replace(":", "");
+
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               name="horas"
+                               value="@horario"
+                               id="hora_@horarioId">
+
+                        <label class="form-check-label"
+                               for="hora_@horarioId">
+                            @horario
+                        </label>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+
+    <div class="form-text">
+        Selecione um ou mais horários.
+    </div>
+</div>
 
                         <div class="mb-3">
                             <label for="quadra" class="form-label">Quadra</label>
@@ -118,14 +150,20 @@
                     return response.json();
                 })
                 .then(horarios => {
-                    const selectHora = document.getElementById('hora');
-                    if (selectHora) {
-                        selectHora.innerHTML = '<option value="">Selecione um horário</option>';
+                    const container = document.getElementById('horariosContainer');
+                    if (container) {
+                        container.innerHTML = '';
                         horarios.forEach(horario => {
-                            const option = document.createElement('option');
-                            option.value = horario;
-                            option.textContent = horario;
-                            selectHora.appendChild(option);
+                            const horarioId = horario.replace(/[:\s]/g, '');
+                            const col = document.createElement('div');
+                            col.className = 'col';
+                            col.innerHTML = `
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="horas" value="${horario}" id="hora_${horarioId}" />
+                                    <label class="form-check-label" for="hora_${horarioId}">${horario}</label>
+                                </div>
+                            `;
+                            container.appendChild(col);
                         });
                     }
                 })
