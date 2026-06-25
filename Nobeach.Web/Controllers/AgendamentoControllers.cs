@@ -155,7 +155,7 @@ var datasBloqueadas = await _context.Diaquadras
     }
     if(data.DayOfWeek == DayOfWeek.Monday || data.DayOfWeek == DayOfWeek.Tuesday || data.DayOfWeek == DayOfWeek.Wednesday || data.DayOfWeek == DayOfWeek.Thursday || data.DayOfWeek == DayOfWeek.Friday)
         {
-            grandeTotal = grandeTotal.Where(h => h >= new TimeSpan(18, 0, 0)).ToList();
+            grandeTotal = grandeTotal.Where(h => h >= new TimeSpan(16, 0, 0)).ToList();
         }
     ViewBag.HorariosDisponiveis = disponiveis.Select(h => h.ToString(@"hh\:mm")).ToList();
     ViewBag.DataSelecionada = data.ToString("yyyy-MM-dd");
