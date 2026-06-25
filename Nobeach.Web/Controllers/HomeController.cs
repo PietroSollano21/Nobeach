@@ -120,11 +120,14 @@ public class HomeController : Controller
             new TimeSpan(18,0,0), new TimeSpan(19,0,0), new TimeSpan(20,0,0), new TimeSpan(21,0,0)
         };
 
-        if (data.DayOfWeek == DayOfWeek.Sunday)
+        if (data.DayOfWeek == DayOfWeek.Sunday || data.DayOfWeek == DayOfWeek.Saturday)
         {
             grandeTotal = grandeTotal.Where(h => h <= new TimeSpan(10, 0, 0)).ToList();
         }
-
+if(data.DayOfWeek == DayOfWeek.Monday || data.DayOfWeek == DayOfWeek.Tuesday || data.DayOfWeek == DayOfWeek.Wednesday || data.DayOfWeek == DayOfWeek.Thursday || data.DayOfWeek == DayOfWeek.Friday)
+        {
+            grandeTotal = grandeTotal.Where(h => h >= new TimeSpan(18, 0, 0)).ToList();
+        }
         return grandeTotal;
     }
 
@@ -182,10 +185,21 @@ public async Task<IActionResult> ConfirmarAgendamento(
             return RedirectToAction("Agenda");
         }
 
-        if (dataAgendamento.DayOfWeek == DayOfWeek.Sunday && horaAgendamento > new TimeSpan(15, 0, 0))
+        if (dataAgendamento.DayOfWeek == DayOfWeek.Sunday || dataAgendamento.DayOfWeek == DayOfWeek.Saturday)
         {
-            TempData["Erro"] = "Nos domingos, os horários disponíveis vão somente até as 10h.";
-            return RedirectToAction("Agenda");
+            if (horaAgendamento >= new TimeSpan(10, 0, 0))
+            {
+                TempData["Erro"] = "Nos finais de semana, os horários disponíveis vão somente até as 10h.";
+                return RedirectToAction("Agenda");
+            }
+        }
+        if(dataAgendamento.DayOfWeek == DayOfWeek.Monday || dataAgendamento.DayOfWeek == DayOfWeek.Tuesday || dataAgendamento.DayOfWeek == DayOfWeek.Wednesday || dataAgendamento.DayOfWeek == DayOfWeek.Thursday || dataAgendamento.DayOfWeek == DayOfWeek.Friday)
+        {
+            if (horaAgendamento < new TimeSpan(18,0,0))
+            {
+                TempData["Erro"] = "Só é possível agendar horários a partir das 18h nos dias de semana.";
+                return RedirectToAction("Agenda");
+            }
         }
 
         horariosTimeSpan.Add(horaAgendamento);

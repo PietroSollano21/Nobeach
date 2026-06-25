@@ -83,10 +83,14 @@ namespace Nobeach.Controllers
     }
     
     // Filtrar horários após 10:00 nos domingos
-    if (data.DayOfWeek == DayOfWeek.Sunday)
+    if (data.DayOfWeek == DayOfWeek.Sunday || data.DayOfWeek == DayOfWeek.Saturday)
     {
-        disponiveis = disponiveis.Where(h => h < new TimeSpan(15, 0, 0)).ToList();
+        disponiveis = disponiveis.Where(h => h < new TimeSpan(10, 0, 0)).ToList();
     }
+    if(data.DayOfWeek == DayOfWeek.Monday || data.DayOfWeek == DayOfWeek.Tuesday || data.DayOfWeek == DayOfWeek.Wednesday || data.DayOfWeek == DayOfWeek.Thursday || data.DayOfWeek == DayOfWeek.Friday)
+        {
+            grandeTotal = grandeTotal.Where(h => h >= new TimeSpan(18, 0, 0)).ToList();
+        }
     ViewBag.HorariosDisponiveis = disponiveis.Select(h => h.ToString(@"hh\:mm")).ToList();
     ViewBag.DataSelecionada = data.ToString("yyyy-MM-dd");
     var quadras = await _context.Quadras.ToListAsync();
@@ -145,11 +149,14 @@ var datasBloqueadas = await _context.Diaquadras
     }
     
     // Filtrar horários após 10:00 nos domingos
-    if (data.DayOfWeek == DayOfWeek.Sunday)
+    if (data.DayOfWeek == DayOfWeek.Sunday || data.DayOfWeek == DayOfWeek.Saturday)
     {
-        disponiveis = disponiveis.Where(h => h < new TimeSpan(15, 0, 0)).ToList();
+        disponiveis = disponiveis.Where(h => h < new TimeSpan(10, 0, 0)).ToList();
     }
-    
+    if(data.DayOfWeek == DayOfWeek.Monday || data.DayOfWeek == DayOfWeek.Tuesday || data.DayOfWeek == DayOfWeek.Wednesday || data.DayOfWeek == DayOfWeek.Thursday || data.DayOfWeek == DayOfWeek.Friday)
+        {
+            grandeTotal = grandeTotal.Where(h => h >= new TimeSpan(18, 0, 0)).ToList();
+        }
     ViewBag.HorariosDisponiveis = disponiveis.Select(h => h.ToString(@"hh\:mm")).ToList();
     ViewBag.DataSelecionada = data.ToString("yyyy-MM-dd");
     ViewBag.DatasBloqueadas = datasBloqueadas;
