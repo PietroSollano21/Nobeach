@@ -126,12 +126,11 @@ public class HomeController : Controller
         }
 if(data.DayOfWeek == DayOfWeek.Monday || data.DayOfWeek == DayOfWeek.Tuesday || data.DayOfWeek == DayOfWeek.Wednesday || data.DayOfWeek == DayOfWeek.Thursday || data.DayOfWeek == DayOfWeek.Friday)
         {
-            grandeTotal = grandeTotal.Where(h => h >= new TimeSpan(18, 0, 0)).ToList();
+            grandeTotal = grandeTotal.Where(h => h >= new TimeSpan(16, 0, 0)).ToList();
         }
         return grandeTotal;
     }
 
-     [HttpPost]
 [HttpPost]
 [ValidateAntiForgeryToken]
 public async Task<IActionResult> ConfirmarAgendamento(
@@ -195,9 +194,9 @@ public async Task<IActionResult> ConfirmarAgendamento(
         }
         if(dataAgendamento.DayOfWeek == DayOfWeek.Monday || dataAgendamento.DayOfWeek == DayOfWeek.Tuesday || dataAgendamento.DayOfWeek == DayOfWeek.Wednesday || dataAgendamento.DayOfWeek == DayOfWeek.Thursday || dataAgendamento.DayOfWeek == DayOfWeek.Friday)
         {
-            if (horaAgendamento < new TimeSpan(18,0,0))
+            if (horaAgendamento < new TimeSpan(16,0,0))
             {
-                TempData["Erro"] = "Só é possível agendar horários a partir das 18h nos dias de semana.";
+                TempData["Erro"] = "Só é possível agendar horários a partir das 16h nos dias de semana.";
                 return RedirectToAction("Agenda");
             }
         }
