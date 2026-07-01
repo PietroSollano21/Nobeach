@@ -116,17 +116,21 @@ public class HomeController : Controller
         var grandeTotal = new List<TimeSpan>
         {
             new TimeSpan(6,0,0), new TimeSpan(7,0,0), new TimeSpan(8,0,0), new TimeSpan(9,0,0),
-            new TimeSpan(10,0,0), new TimeSpan(15,0,0), new TimeSpan(16,0,0), new TimeSpan(17,0,0),
+            new TimeSpan(10,0,0),new TimeSpan(11,0,0), new TimeSpan(15,0,0), new TimeSpan(16,0,0), new TimeSpan(17,0,0),
             new TimeSpan(18,0,0), new TimeSpan(19,0,0), new TimeSpan(20,0,0), new TimeSpan(21,0,0)
         };
 
-        if (data.DayOfWeek == DayOfWeek.Sunday || data.DayOfWeek == DayOfWeek.Saturday)
+        if (data.DayOfWeek == DayOfWeek.Sunday)
         {
             grandeTotal = grandeTotal.Where(h => h <= new TimeSpan(10, 0, 0)).ToList();
         }
 if(data.DayOfWeek == DayOfWeek.Monday || data.DayOfWeek == DayOfWeek.Tuesday || data.DayOfWeek == DayOfWeek.Wednesday || data.DayOfWeek == DayOfWeek.Thursday || data.DayOfWeek == DayOfWeek.Friday)
         {
             grandeTotal = grandeTotal.Where(h => h >= new TimeSpan(16, 0, 0)).ToList();
+        }
+        if(data.DayOfWeek == DayOfWeek.Saturday)
+        {
+            grandeTotal = grandeTotal.Where(h => h <= new TimeSpan(11, 0, 0)).ToList();
         }
         return grandeTotal;
     }
@@ -184,11 +188,11 @@ public async Task<IActionResult> ConfirmarAgendamento(
             return RedirectToAction("Agenda");
         }
 
-        if (dataAgendamento.DayOfWeek == DayOfWeek.Sunday || dataAgendamento.DayOfWeek == DayOfWeek.Saturday)
+        if (dataAgendamento.DayOfWeek == DayOfWeek.Sunday )
         {
-            if (horaAgendamento >= new TimeSpan(10, 0, 0))
+            if (horaAgendamento > new TimeSpan(10, 0, 0))
             {
-                TempData["Erro"] = "Nos finais de semana, os horários disponíveis vão somente até as 10h.";
+                TempData["Erro"] = "Nos Domingos, os horários disponíveis vão somente até as 10h.";
                 return RedirectToAction("Agenda");
             }
         }
@@ -197,6 +201,14 @@ public async Task<IActionResult> ConfirmarAgendamento(
             if (horaAgendamento < new TimeSpan(16,0,0))
             {
                 TempData["Erro"] = "Só é possível agendar horários a partir das 16h nos dias de semana.";
+                return RedirectToAction("Agenda");
+            }
+        }
+        if(dataAgendamento.DayOfWeek == DayOfWeek.Saturday)
+        {
+            if (horaAgendamento > new TimeSpan(11,0,0))
+            {
+                TempData["Erro"] = "Não é possível agendar após as 11h aos sábados.";
                 return RedirectToAction("Agenda");
             }
         }

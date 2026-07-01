@@ -68,7 +68,7 @@ namespace Nobeach.Controllers
     List<TimeSpan> grandeTotal = new List<TimeSpan>
     {
         new TimeSpan(6,0 ,0),new TimeSpan(7, 0, 0),  new TimeSpan(8, 0, 0), new TimeSpan(9, 0, 0),
-        new TimeSpan(10, 0, 0), new TimeSpan(15, 0, 0), new TimeSpan(16, 0, 0),
+        new TimeSpan(10, 0, 0),new TimeSpan(11, 0, 0), new TimeSpan(15, 0, 0), new TimeSpan(16, 0, 0),
         new TimeSpan(17, 0, 0), new TimeSpan(18, 0, 0), new TimeSpan(19, 0, 0),
         new TimeSpan(20, 0, 0), new TimeSpan(21, 0, 0)
     };
@@ -83,13 +83,17 @@ namespace Nobeach.Controllers
     }
     
     // Filtrar horários após 10:00 nos domingos
-    if (data.DayOfWeek == DayOfWeek.Sunday || data.DayOfWeek == DayOfWeek.Saturday)
+    if (data.DayOfWeek == DayOfWeek.Sunday)
     {
         disponiveis = disponiveis.Where(h => h < new TimeSpan(10, 0, 0)).ToList();
     }
     if(data.DayOfWeek == DayOfWeek.Monday || data.DayOfWeek == DayOfWeek.Tuesday || data.DayOfWeek == DayOfWeek.Wednesday || data.DayOfWeek == DayOfWeek.Thursday || data.DayOfWeek == DayOfWeek.Friday)
         {
             grandeTotal = grandeTotal.Where(h => h >= new TimeSpan(16, 0, 0)).ToList();
+        }
+        if(data.DayOfWeek == DayOfWeek.Saturday)
+        {
+            grandeTotal = grandeTotal.Where(h => h <= new TimeSpan(11, 0, 0)).ToList();
         }
     ViewBag.HorariosDisponiveis = disponiveis.Select(h => h.ToString(@"hh\:mm")).ToList();
     ViewBag.DataSelecionada = data.ToString("yyyy-MM-dd");
@@ -130,7 +134,7 @@ var datasBloqueadas = await _context.Diaquadras
     List<TimeSpan> grandeTotal = new List<TimeSpan>
     {
         new TimeSpan(6,0 ,0),new TimeSpan(7, 0, 0),  new TimeSpan(8, 0, 0), new TimeSpan(9, 0, 0),
-        new TimeSpan(10, 0, 0), new TimeSpan(15, 0, 0), new TimeSpan(16, 0, 0),
+        new TimeSpan(10, 0, 0),new TimeSpan(11, 0, 0), new TimeSpan(15, 0, 0), new TimeSpan(16, 0, 0),
         new TimeSpan(17, 0, 0), new TimeSpan(18, 0, 0), new TimeSpan(19, 0, 0),
         new TimeSpan(20, 0, 0), new TimeSpan(21, 0, 0)
     };
@@ -149,13 +153,17 @@ var datasBloqueadas = await _context.Diaquadras
     }
     
     // Filtrar horários após 10:00 nos domingos
-    if (data.DayOfWeek == DayOfWeek.Sunday || data.DayOfWeek == DayOfWeek.Saturday)
+    if (data.DayOfWeek == DayOfWeek.Sunday)
     {
         disponiveis = disponiveis.Where(h => h < new TimeSpan(10, 0, 0)).ToList();
     }
     if(data.DayOfWeek == DayOfWeek.Monday || data.DayOfWeek == DayOfWeek.Tuesday || data.DayOfWeek == DayOfWeek.Wednesday || data.DayOfWeek == DayOfWeek.Thursday || data.DayOfWeek == DayOfWeek.Friday)
         {
             grandeTotal = grandeTotal.Where(h => h >= new TimeSpan(16, 0, 0)).ToList();
+        }
+        if(data.DayOfWeek == DayOfWeek.Saturday)
+        {
+            grandeTotal = grandeTotal.Where(h => h <= new TimeSpan(11, 0, 0)).ToList();
         }
     ViewBag.HorariosDisponiveis = disponiveis.Select(h => h.ToString(@"hh\:mm")).ToList();
     ViewBag.DataSelecionada = data.ToString("yyyy-MM-dd");

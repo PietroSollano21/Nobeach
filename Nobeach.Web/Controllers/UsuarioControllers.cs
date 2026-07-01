@@ -118,7 +118,7 @@ namespace Nobeach.Controllers
             else
             {
                 ViewBag.Error = "Email ou senha inválidos.";
-                ViewBag.ReturnUrl = returnUrl;
+                //ViewBag.ReturnUrl = returnUrl;
                 return View();
             }
         }
