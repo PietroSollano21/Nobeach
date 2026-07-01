@@ -66,13 +66,6 @@ namespace Nobeach.Controllers
             
             return RedirectToAction("Index", "Home");
             }
-    
-        
-        
-       
-    
-
-
         [HttpGet]
         // Página de login (GET). Também usada quando o modal não é empregado.
         public IActionResult Login(string returnUrl = "/Home/Privacy")

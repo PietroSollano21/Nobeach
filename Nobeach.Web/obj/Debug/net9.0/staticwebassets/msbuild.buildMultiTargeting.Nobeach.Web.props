@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/Nobeach.Web.props" />
-</Project>

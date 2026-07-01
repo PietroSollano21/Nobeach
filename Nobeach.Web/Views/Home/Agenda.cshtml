@@ -32,9 +32,12 @@
                             <li><strong>Valor:</strong> R$ 80,00</li>
                             <li><strong>Pagamento:</strong> No local</li>
                             <p><strong>Não é possível trocar o esporte após o agendamento</strong>
-                            <p><strong>55 minutos de uso<strong><p>
+                            <p><strong>55 minutos de uso</strong></p>
                         </ul>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div class="alert alert-info" role="alert">
+                        <li><strong>Promoção Inicial:</strong> Este Sábado 04/06, o valor de agendamento será de R$ 50,00. Aproveite!</li>
                     </div>
                     <form method="post" action="/Home/ConfirmarAgendamento">
                         @Html.AntiForgeryToken()
@@ -144,11 +147,10 @@
         function atualizarHorarios(data) {
             if (!data) return;
 
-            fetch('/Home/BuscarHorarios?DataSelecionada=' + data)
-                .then(response => {
+            fetch('/Home/BuscarHorarios?DataSelecionada=' + data).then(response => {
                     if (!response.ok) throw new Error('Erro na resposta do servidor');
                     return response.json();
-                })
+          })
                 .then(horarios => {
                     const container = document.getElementById('horariosContainer');
                     if (container) {
@@ -182,4 +184,5 @@
             });
         });
     </script>
-}
+}       
+               
