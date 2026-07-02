@@ -405,3 +405,21 @@ header {
   .hero-text h1 { font-size: clamp(2.5rem, 4vw, 4rem);
     line-height:1.1; }
 }
+localizacao {
+    padding: 80px 20px;
+    text-align: center;
+    background: #f8f9fa;
+}
+
+.localizacao h2 {
+    color: #132b50;
+    margin-bottom: 30px;
+}
+
+.localizacao iframe {
+    width: 100%;
+    max-width: 1200px;
+    height: 450px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.15);
+}

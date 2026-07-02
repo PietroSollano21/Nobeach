@@ -142,15 +142,27 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
     <script>
+        let datePicker;
         const blockedDates = @Html.Raw(Json.Serialize(ViewBag.DatasBloqueadas ?? new List<string>()));
 
-        function atualizarHorarios(data) {
-            if (!data) return;
+        function limparHorarios() {
+            const container = document.getElementById('horariosContainer');
+            if (container) {
+                container.innerHTML = '<div class="col text-center"><p class="text-muted">Selecione uma quadra para ver os horários disponíveis.</p></div>';
+            }
+        }
 
-            fetch('/Home/BuscarHorarios?DataSelecionada=' + data).then(response => {
+        function atualizarHorarios(data, quadra) {
+            if (!data || !quadra) {
+                limparHorarios();
+                return;
+            }
+
+            fetch(`/Home/BuscarHorarios?DataSelecionada=${encodeURIComponent(data)}&quadra=${encodeURIComponent(quadra)}`)
+                .then(response => {
                     if (!response.ok) throw new Error('Erro na resposta do servidor');
                     return response.json();
-          })
+                })
                 .then(horarios => {
                     const container = document.getElementById('horariosContainer');
                     if (container) {
@@ -172,16 +184,47 @@
                 .catch(error => console.error('Erro no Fetch:', error));
         }
 
+        function atualizarDatasBloqueadas(quadra) {
+            if (!quadra) {
+                datePicker.set('disable', []);
+                return;
+            }
+
+            fetch(`/Home/BuscarDatasBloqueadas?quadra=${encodeURIComponent(quadra)}`)
+                .then(response => {
+                    if (!response.ok) throw new Error('Erro na resposta do servidor');
+                    return response.json();
+                })
+                .then(dates => {
+                    blockedDates.length = 0;
+                    dates.forEach(date => blockedDates.push(date));
+                    datePicker.set('disable', blockedDates);
+                })
+                .catch(error => console.error('Erro no Fetch:', error));
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
-            flatpickr("#data", {
+            const quadraSelect = document.getElementById('quadra');
+
+            datePicker = flatpickr("#data", {
                 locale: "pt",
                 minDate: "today",
                 dateFormat: "Y-m-d",
                 disable: blockedDates,
                 onChange: function (selectedDates, dateStr) {
-                    atualizarHorarios(dateStr);
+                    const quadra = quadraSelect ? quadraSelect.value : '';
+                    atualizarHorarios(dateStr, quadra);
                 }
             });
+
+            if (quadraSelect) {
+                quadraSelect.addEventListener('change', function () {
+                    const dataInput = document.getElementById('data');
+                    const dataValue = dataInput ? dataInput.value : '';
+                    atualizarDatasBloqueadas(this.value);
+                    atualizarHorarios(dataValue, this.value);
+                });
+            }
         });
     </script>
 }       

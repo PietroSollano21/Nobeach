@@ -428,7 +428,6 @@ C:/Users/Windows/Documents/Nobeach/Nobeach.Web/obj/Debug/net9.0/compressed/gpi1j
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/rjimswa.dswa.cache.json
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/rjsmrazor.dswa.cache.json
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json
-/home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/compressed/gpi1jf56ll-{0}-mkbqehosdt-mkbqehosdt.gz
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/compressed/6xw57ink8n-{0}-61n19gt1b8-61n19gt1b8.gz
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/compressed/befq2rdhfx-{0}-5h7bin9avl-5h7bin9avl.gz
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/compressed/zn1lufp35t-{0}-a49y9znztv-a49y9znztv.gz
@@ -499,3 +498,4 @@ C:/Users/Windows/Documents/Nobeach/Nobeach.Web/obj/Debug/net9.0/compressed/gpi1j
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/compressed/dczskoc1x8-{0}-szl50elnv8-szl50elnv8.gz
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/staticwebassets.build.json.cache
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/swae.build.ex.cache
+/home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/compressed/gpi1jf56ll-{0}-xabr9m7hg6-xabr9m7hg6.gz

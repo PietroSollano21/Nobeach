@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Nobeach.Models
 {
+    
 public class Usuario
 {
     [Key]

@@ -11,7 +11,18 @@ public class Conexao
     }
 
     public MySqlConnection GetConnection()
-    {
-        return new MySqlConnection(_connectionString);
+    {try
+{
+    using var conn = new MySqlConnection(_connectionString);
+    conn.Open();
+    Console.WriteLine("Conectou!");
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.ToString());
+}
+        Console.WriteLine(_connectionString);
+    return new MySqlConnection(_connectionString);
+        ///return new MySqlConnection(_connectionString);
     }
 }

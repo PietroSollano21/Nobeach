@@ -66,27 +66,28 @@ public class HomeController : Controller
     public async Task<IActionResult> Agenda()
     {
         ViewBag.Quadras = await _context.Quadras.ToListAsync();
-        var datasBloqueadas = await _context.Diaquadras
-            .Where(d => !d.Disponivel && d.Data >= DateTime.Today)
-            .Select(d => d.Data.ToString("yyyy-MM-dd"))
-            .Distinct()
-            .ToListAsync();
-        ViewBag.DatasBloqueadas = datasBloqueadas;
+        ViewBag.DatasBloqueadas = new List<string>();
 
-        var data = DateTime.Today;
-        var horarios = await ObterHorariosDisponiveis(data);
-        ViewBag.DataSelecionada = data.ToString("yyyy-MM-dd");
-        ViewBag.HorariosDisponiveis = horarios;
+        ViewBag.DataSelecionada = DateTime.Today.ToString("yyyy-MM-dd");
+        ViewBag.HorariosDisponiveis = new List<string>();
 
         return View();
     }
 
     [HttpGet]
-    public async Task<IActionResult> BuscarHorarios(DateTime DataSelecionada)
+    public async Task<IActionResult> BuscarHorarios(DateTime DataSelecionada, string quadra)
     {
         var data = DataSelecionada.Date;
+
+        if (string.IsNullOrWhiteSpace(quadra))
+        {
+            return Json(ObterHorariosBase(data)
+                .Select(h => h.ToString(@"hh\:mm"))
+                .ToList());
+        }
+
         var ocupados = await _context.Agendamentos
-            .Where(a => a.Data.Date == data && a.Status != "Cancelado")
+            .Where(a => a.Quadra == quadra && a.Data.Date == data && a.Status != "Cancelado")
             .Select(a => a.Hora)
             .ToListAsync();
 
@@ -98,17 +99,28 @@ public class HomeController : Controller
         return Json(disponiveis);
     }
 
-    private async Task<List<string>> ObterHorariosDisponiveis(DateTime data)
+    [HttpGet]
+    public async Task<IActionResult> BuscarDatasBloqueadas(string quadra)
     {
-        var ocupados = await _context.Agendamentos
-            .Where(a => a.Data.Date == data.Date && a.Status != "Cancelado")
-            .Select(a => a.Hora)
+        if (string.IsNullOrWhiteSpace(quadra))
+        {
+            return Json(new List<string>());
+        }
+
+        var datasBloqueadas = await _context.Diaquadras
+            .Where(d => d.QuadraId == quadra && !d.Disponivel && d.Data >= DateTime.Today)
+            .Select(d => d.Data.ToString("yyyy-MM-dd"))
+            .Distinct()
             .ToListAsync();
 
-        return ObterHorariosBase(data)
-            .Where(h => !ocupados.Contains(h))
+        return Json(datasBloqueadas);
+    }
+
+    private Task<List<string>> ObterHorariosDisponiveis(DateTime data)
+    {
+        return Task.FromResult(ObterHorariosBase(data)
             .Select(h => h.ToString(@"hh\:mm"))
-            .ToList();
+            .ToList());
     }
 
     private List<TimeSpan> ObterHorariosBase(DateTime data)

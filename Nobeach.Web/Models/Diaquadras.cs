@@ -1,7 +1,10 @@
-using System.ComponentModel.DataAnnotations;
 
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace Nobeach.Models
 {
+    
     public class Diaquadra
     {
         [DataType(DataType.Date)]
