@@ -36,9 +36,6 @@
                         </ul>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div class="alert alert-info" role="alert">
-                        <li><strong>Promoção Inicial:</strong> Este Sábado 04/06, o valor de agendamento será de R$ 50,00. Aproveite!</li>
-                    </div>
                     <form method="post" action="/Home/ConfirmarAgendamento">
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(false, "", new { @class = "text-danger mb-3" })
