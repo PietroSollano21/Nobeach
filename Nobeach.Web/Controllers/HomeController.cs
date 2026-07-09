@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Nobeach.Data;
 using System.Data;
 using Nobeach.Enums;
+using System.Text.RegularExpressions;
 
 namespace Nobeach.Controllers;
 
@@ -151,10 +152,12 @@ public async Task<IActionResult> ConfirmarAgendamento(
     string data,
     string[] horas,
     string quadra,
+    string telefone,
     Esporte esporte)
 {
     // Validação básica
-    if (string.IsNullOrWhiteSpace(nome) ||
+    if (string.IsNullOrWhiteSpace(nome) || 
+        string.IsNullOrWhiteSpace(telefone) ||
         string.IsNullOrWhiteSpace(data) ||
         horas == null || horas.Length == 0 ||
         string.IsNullOrWhiteSpace(quadra))
@@ -169,7 +172,12 @@ public async Task<IActionResult> ConfirmarAgendamento(
         TempData["Erro"] = "Data inválida.";
         return RedirectToAction("Agenda");
     }
-
+    telefone = Regex.Replace(telefone, @"[^\d]", ""); // Remove caracteres não numéricos
+    if(telefone.Length !=10 && telefone.Length !=11)
+    {
+        TempData["Erro"] = "Telefone inválido. Insira um número válido com DDD.";
+        return RedirectToAction("Agenda");
+    }
     if (dataAgendamento.Date < DateTime.Today)
     {
         TempData["Erro"] = "Não é possível agendar datas passadas.";
@@ -254,6 +262,7 @@ public async Task<IActionResult> ConfirmarAgendamento(
         var novoAgendamento = new Agendamento
         {
             NomeCliente = nome,
+            Telefone = telefone,
             Data = dataAgendamento,
             Hora = horaAgendamento,
             Quadra = quadra,
