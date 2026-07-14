@@ -62,6 +62,21 @@ public class HomeController : Controller
     .OrderBy(a => a.Data)
     .ThenBy(a => a.Hora)
     .ToListAsync();
+
+    var agendamentosCancelados = meusAgendamentos.Where(a => a.Status == "Cancelado").ToList();
+    if (agendamentosCancelados.Any())
+    {
+        if (agendamentosCancelados.Count == 1)
+        {
+            var cancelado = agendamentosCancelados.First();
+            ViewBag.MensagemCancelamento = $"Seu agendamento de {cancelado.Data:dd/MM/yyyy} às {cancelado.Hora:hh\\:mm} foi cancelado pelo administrador.";
+        }
+        else
+        {
+            ViewBag.MensagemCancelamento = $"{agendamentosCancelados.Count} agendamentos foram cancelados pelo administrador.";
+        }
+    }
+
     return View(meusAgendamentos);
     }
     public async Task<IActionResult> Agenda()

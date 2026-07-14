@@ -2,6 +2,7 @@
     ViewData["Title"] = "Tabela";
 }
 @using Nobeach.Controllers;
+@using Nobeach.Models;
 @model (List<Nobeach.Models.Agendamento> Agendamentos, List<Nobeach.Models.Diaquadra> Dias)
 
 <h1 class="text-center mt-4">Bem-vindo!<br><small class="text-muted">Aqui estão seus agendamentos</small></h1>
@@ -23,6 +24,7 @@
                 <th>Quadra</th>
                 <th>Esporte</th>
                 <th>Telefone</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +37,13 @@
                     <td>@agendamento.Quadra</td>
                     <td>@agendamento.Esporte</td>
                     <td>@agendamento.Telefone</td>
+                    <td>
+                        <form action="/Home/CancelarAgendamentos" method="post" onsubmit="return confirm('Tem certeza que deseja cancelar este agendamento?');" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@agendamento.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
