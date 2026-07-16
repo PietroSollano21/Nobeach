@@ -93,14 +93,13 @@ var usuario = await _context.Usuarios
     }
     [HttpPost]
     [Authorize(Roles = "Admin")]
-    // Cancela um agendamento existente (marca como cancelado)
+    // Cancela um agendamento existente 
     public async Task<IActionResult> CancelarAgendamento(long agendamentoId)
         {
             var agendamento = await _context.Agendamentos.FirstOrDefaultAsync(a => a.Id == agendamentoId);
             if (agendamento != null)
             {
-                agendamento.Status = "Cancelado";
-                _context.Agendamentos.Update(agendamento);
+                _context.Agendamentos.Remove(agendamento);
                 await _context.SaveChangesAsync();
                 TempData["Sucesso"] = $"Agendamento de {agendamento.NomeCliente} em {agendamento.Data:dd/MM/yyyy} às {agendamento.Hora:hh\\:mm} foi cancelado.";
             }
