@@ -8,12 +8,24 @@ using MySql.Data.MySqlClient;
 using Nobeach.Models;
 using Microsoft.Extensions.Configuration;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Nobeach.Services;
+using Nobeach.Services.Interfaces;
+using Resend;
+using Nobeach.Configurations;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddOptions();
+builder.Services.Configure<ResendClientOptions>( o =>
+{
+    o.ApiToken = builder.Configuration["Resend:ApiKey"]!;
+});
+builder.Services.AddHttpClient<ResendClient>();
+builder.Services.AddTransient<IResend, ResendClient>();
+;
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 Console.WriteLine(connectionString);
 builder.Services.AddDbContext<AppDbContext>(options =>options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
@@ -22,6 +34,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>options.UseMySql(connectio
         options.AccessDeniedPath = "/Usuario/Login";
     });
 builder.Services.AddScoped<AgendamentoRepositories>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddAuthorization();
 var app = builder.Build();
 
@@ -32,7 +45,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

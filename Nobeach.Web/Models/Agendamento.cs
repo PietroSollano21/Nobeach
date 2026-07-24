@@ -15,14 +15,7 @@ namespace Nobeach.Models
         //public decimal Valor { get; set; }
         //public required string? statuspagamento  { get; set; }
         //public long? PaymentId { get; set; }
-        public bool Cancelado 
-        { 
-            get
-            {
-                DateTime momentocorte = Data.Date.Add(Hora);
-                return momentocorte < DateTime.Now.AddHours(6);
-            }
-        }
+        public bool Cancelado { get; set;}
         public string? Quadra { get; set; } = string.Empty; 
         public string EmailCliente { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;

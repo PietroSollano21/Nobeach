@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nobeach.Data;
 
@@ -11,9 +12,11 @@ using Nobeach.Data;
 namespace Nobeach.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260722133033_TrocaEmail")]
+    partial class TrocaEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace Nobeach.Web.Migrations
                         .HasColumnType("bigint");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Cancelado")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)")
@@ -126,10 +126,7 @@ namespace Nobeach.Web.Migrations
                     b.Property<bool>("EmailConfirmado")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime?>("ExpiracaoConfirmacaoEmail")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("ExpiracaoRecuperacaoSenha")
+                    b.Property<DateTime?>("ExpiracaoToken")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("ExpiracaoTrocaEmail")
@@ -150,9 +147,6 @@ namespace Nobeach.Web.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("TokenConfirmacaoEmail")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("TokenRecuperacaoSenha")
                         .HasColumnType("longtext");
 
                     b.Property<string>("TokenTrocaEmail")

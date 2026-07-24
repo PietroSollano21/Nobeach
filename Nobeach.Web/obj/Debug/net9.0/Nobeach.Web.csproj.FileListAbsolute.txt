@@ -499,3 +499,4 @@ C:/Users/Windows/Documents/Nobeach/Nobeach.Web/obj/Debug/net9.0/compressed/gpi1j
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/staticwebassets.build.json.cache
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/swae.build.ex.cache
 /home/wellington/Nobeach/Nobeach.Web/obj/Debug/net9.0/compressed/gpi1jf56ll-{0}-xabr9m7hg6-xabr9m7hg6.gz
+/home/wellington/Nobeach/Nobeach.Web/bin/Debug/net9.0/Resend.dll

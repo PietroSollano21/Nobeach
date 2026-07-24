@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/Nobeach.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
+    
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-gradient border-bottom box-shadow">
             <div class="container-fluid">
@@ -30,6 +31,12 @@
             </div>
         </nav>
     </header>
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-sucess text-center">
+            @TempData["Sucesso"]
+        </div>
+    }
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

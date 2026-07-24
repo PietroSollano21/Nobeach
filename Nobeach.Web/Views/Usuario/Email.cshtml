@@ -1,0 +1,77 @@
+@{
+    ViewData["Title"] = "Confirmação de E-mail";
+}
+
+<div class="container py-5">
+
+    <div class="card shadow-lg border-0 mx-auto" style="max-width:650px">
+
+        <div class="card-body text-center p-5">
+
+            <div class="display-2 text-primary mb-3">
+                📧
+            </div>
+
+            <h2>Quase pronto!</h2>
+
+            <p class="lead mt-3">
+                Enviamos um e-mail de confirmação para:
+            </p>
+
+            <h4>@User.Identity?.Name</h4>
+
+            <hr>
+
+            <p>
+                Clique no botão presente no e-mail para ativar sua conta.
+            </p>
+                <div class="d-grid gap-2">
+
+                <form asp-action="ReenviarConfirmacao" method="post">
+
+                    <input
+                        type="hidden"
+                        name="email"
+                        value="@User.Identity?.Name" />
+
+                    <button
+                        class="btn btn-success">
+
+                        Reenviar confirmação
+
+                    </button>
+
+                </form>
+
+                <a
+                    asp-action="AlterarEmail"
+                    class="btn btn-outline-warning">
+
+                    Alterar e-mail
+
+                </a>
+                    <h3>Caso tenha informado um endereço incorreto, altere-o antes de solicitar um novo e-mail de confirmação.</h3>
+            </div>
+
+            <p class="text-muted">
+                O link expira em 24 horas.
+            </p>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>⚠️ Atenção:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li><strong>Por motivos de segurança, é necessário confirmar seu e-mail antes de continuar utilizando o sistema. Essa confirmação é obrigatória para acessar os recursos do NoBeach.</strong> </li>
+                            
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+            <a asp-controller="Home"
+               asp-action="Index"
+               class="btn btn-primary mt-3">
+                Voltar ao início
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

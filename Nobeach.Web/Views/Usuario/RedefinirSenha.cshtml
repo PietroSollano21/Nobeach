@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Redefinir senha";
+}
+
+<div class="container mt-5" style="max-width:500px">
+<div asp-validation-summary="All" class="text-danger"></div>
+    <h2>Redefinir senha</h2>
+
+    <form asp-action="RedefinirSenha" method="post">
+
+        <input type="hidden"
+               name="token"
+               value="@ViewBag.Token" />
+
+        <div class="mb-3">
+
+            <label>Nova senha</label>
+
+            <input
+                type="password"
+                name="novaSenha"
+                class="form-control"
+                required />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Confirmar senha</label>
+
+            <input
+                type="password"
+                name="confirmarSenha"
+                class="form-control"
+                required />
+
+        </div>
+
+        <button class="btn btn-success">
+
+            Alterar senha
+
+        </button>
+
+    </form>
+
+</div>

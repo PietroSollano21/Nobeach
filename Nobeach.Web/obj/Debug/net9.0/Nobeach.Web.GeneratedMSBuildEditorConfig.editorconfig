@@ -58,12 +58,36 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/wellington/Nobeach/Nobeach.Web/Views/Usuario/AlterarEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9BbHRlcmFyRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/wellington/Nobeach/Nobeach.Web/Views/Usuario/Cadastro.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9DYWRhc3Ryby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/wellington/Nobeach/Nobeach.Web/Views/Usuario/Confirmado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9Db25maXJtYWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/wellington/Nobeach/Nobeach.Web/Views/Usuario/Email.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9FbWFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/wellington/Nobeach/Nobeach.Web/Views/Usuario/EsqueciSenha.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9Fc3F1ZWNpU2VuaGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/wellington/Nobeach/Nobeach.Web/Views/Usuario/Expirado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9FeHBpcmFkby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/wellington/Nobeach/Nobeach.Web/Views/Usuario/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/wellington/Nobeach/Nobeach.Web/Views/Usuario/RedefinirSenha.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9SZWRlZmluaXJTZW5oYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/wellington/Nobeach/Nobeach.Web/Views/_ViewImports.cshtml]

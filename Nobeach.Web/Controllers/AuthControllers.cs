@@ -24,9 +24,10 @@ public AuthController(AppDbContext context, UsuarioRepository repo)
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDTO login)
     {
-        var usuario = _context.Usuarios.FirstOrDefault(u => u.Email == login.Email && u.SenhaHash == login.Senha);
-        if (usuario != null && BCrypt.Net.BCrypt.Verify(login.Senha, usuario.SenhaHash))
+       var usuario = _context.Usuarios.FirstOrDefault(u => u.Email == login.Email);
+    if (usuario != null && BCrypt.Net.BCrypt.Verify(login.Senha, usuario.SenhaHash))
         {
+            
            var claims = new List<Claim>// Criamos uma lista de claims para armazenar as informações do usuário
            {
                new Claim(ClaimTypes.Name, usuario.Email), // Usamos o email como nome de usuário

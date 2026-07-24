@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nobeach.Data;
 
@@ -11,9 +12,11 @@ using Nobeach.Data;
 namespace Nobeach.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260723233233_TirandoFiltroDe6HCancelamento")]
+    partial class TirandoFiltroDe6HCancelamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,9 +132,6 @@ namespace Nobeach.Web.Migrations
                     b.Property<DateTime?>("ExpiracaoConfirmacaoEmail")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("ExpiracaoRecuperacaoSenha")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<DateTime?>("ExpiracaoTrocaEmail")
                         .HasColumnType("datetime(6)");
 
@@ -150,9 +150,6 @@ namespace Nobeach.Web.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("TokenConfirmacaoEmail")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("TokenRecuperacaoSenha")
                         .HasColumnType("longtext");
 
                     b.Property<string>("TokenTrocaEmail")

@@ -9,6 +9,10 @@ using Nobeach.Data;
 using System.Data;
 using Nobeach.Enums;
 using System.Text.RegularExpressions;
+using System.Collections.ObjectModel;
+using Nobeach.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies; 
 
 namespace Nobeach.Controllers;
 
@@ -16,25 +20,28 @@ public class HomeController : Controller
 {
     private readonly AppDbContext _context;
     private readonly IConfiguration _configuration;
-    public HomeController(AppDbContext context, IConfiguration configuration)
+    private readonly IEmailService _emailService;
+        public HomeController(AppDbContext context, IConfiguration configuration, IEmailService emailservice)
 {
     _context = context;
     _configuration = configuration;
+    _emailService = emailservice;
 }
     [HttpGet]
     public IActionResult Index()
     {
-       
-        if(User.Identity.IsAuthenticated)
+        Console.WriteLine("Entrou no privacy");
+         if(User.Identity?.IsAuthenticated == true)
         {
             return RedirectToAction("Privacy");
         }
 
         return View();
     }
-
+    [Authorize]
     public async Task<IActionResult> Privacy()
     {
+        Console.WriteLine("Entrou no privacy");
          if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
         {
             return RedirectToAction("Admin", "Adm");
@@ -43,17 +50,19 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index", "Home");
         }
+        
         string emailLogado = User.Identity.Name;
         Console.WriteLine($"Email logado:{emailLogado}");
         var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == emailLogado);
         Console.WriteLine(usuario == null ? "Usuário não encontrado" : $"Usuário encontrado: {usuario.Email}");
-         if (usuario == null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
         if (usuario == null)
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
+        }
+        if(!usuario.EmailConfirmado)
+        {
+            return RedirectToAction("Email", "Usuario");
         }
         DateTime dataHoje = DateTime.Today;
        var meusAgendamentos = await _context.Agendamentos
@@ -305,11 +314,6 @@ public async Task<IActionResult> ConfirmarAgendamento(
         {
             return NotFound();
         }
-        if(agendamento.Cancelado )
-        {
-            TempData["Erro"] = "Nao é possível cancelar um agendamento com menos de 6 horas de antecedência.";
-            return RedirectToAction("Privacy");
-        }
                 _context.Agendamentos.Remove(agendamento);
          
             await _context.SaveChangesAsync();
@@ -317,6 +321,7 @@ public async Task<IActionResult> ConfirmarAgendamento(
 
         return RedirectToAction("Privacy");
     }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

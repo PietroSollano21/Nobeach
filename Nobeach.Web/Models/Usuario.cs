@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.Identity.Client;
 
 namespace Nobeach.Models
 {
@@ -19,8 +20,14 @@ public class Usuario
     public string SenhaHash { get; set; } = string.Empty;
     public string? Perfil { get; set; } = "Cliente";
     public bool IsAdmin => Perfil == "Admin";
-    //[Required(ErrorMessage = "O CPF é obrigatório.")]
-    //[RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "O CPF deve estar no formato XXX.XXX.XXX-XX.")]
-   // public string? CPF {get; set;} = string.Empty;
+    public bool EmailConfirmado { get; set;} = false;
+    public string? TokenConfirmacaoEmail { get; set;}
+    public DateTime? ExpiracaoConfirmacaoEmail { get; set; }
+    public DateTime? DataConfirmacaoEmail { get; set; }
+    public string? TokenTrocaEmail {get; set;}
+    public DateTime? ExpiracaoTrocaEmail {get; set;}
+    public string? NovoEmail {get; set;}
+    public string? TokenRecuperacaoSenha { get; set;}
+    public DateTime? ExpiracaoRecuperacaoSenha {get; set;}
 }
 }

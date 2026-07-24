@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Alterar E-mail";
+}
+
+<div class="container mt-5 ">
+
+    <h2>Alterar e-mail</h2>
+
+    <p>
+        Deseja alterar seu endereço de e-mail? Após informar um novo endereço, enviaremos um e-mail de confirmação para ele. A alteração só será concluída depois que você confirmar o novo e-mail.
+    </p>
+    @if(!ViewData.ModelState.IsValid)
+    {
+        <div asp-validation-summary="All" class="text-danger"></div>
+        }
+    <div class="alert alert-warning">
+        E-mail atual:
+        <strong>@ViewBag.EmailAtual</strong>
+    </div>
+
+    <form asp-action="AlterarEmail" method="post">
+
+        <input type="hidden"
+               name="token"
+               value="@ViewBag.Token" />
+
+        <div class="mb-3">
+
+            <label>Novo e-mail</label>
+
+            <input
+                class="form-control"
+                type="email"
+                name="novoEmail"
+                required />
+
+        </div>
+
+        <button class="btn btn-success">
+
+            Alterar e enviar confirmação
+
+        </button>
+
+    </form>
+        <a asp-action="Email" class="btn btn-outline-warning">
+            Voltar para a página anterior
+            </a>
+</div>
