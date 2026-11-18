@@ -33,8 +33,6 @@ O sistema foi desenvolvido com o objetivo de oferecer uma solução prática par
 
 ## 🛠️ Tecnologias utilizadas
 
-\<!-- Informe as linguagens, frameworks, bibliotecas e ferramentas utilizadas. -->
-
 | Tecnologia   | Finalidade              |
 | ------------ | ----------------------- |
 | C# | Back-End |
